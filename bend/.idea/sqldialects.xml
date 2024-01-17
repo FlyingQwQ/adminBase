@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/top/kuoer/base/mapper/AuthorizeMapper.java" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/src/main/java/top/kuoer/base/mapper/DictionaryMapper.java" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/src/main/java/top/kuoer/base/mapper/MenuMapper.java" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/src/main/java/top/kuoer/base/mapper/ResourceButtonMapper.java" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/src/main/java/top/kuoer/base/mapper/UserMapper.java" dialect="SQLite" />
+  </component>
+</project>

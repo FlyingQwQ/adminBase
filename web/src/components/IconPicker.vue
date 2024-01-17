@@ -1,0 +1,185 @@
+<template>
+    <div>
+        <el-select :disabled="disabled" :value="value" clearable @clear="clearHandle" placeholder="请选择图标">
+            <template slot="prefix">
+                <span class="icon-picker-selected" v-if="value !== '' && value != null">
+                    <i :class=value></i>
+                </span>
+            </template>
+            <el-option class="icon-picker-option" :value="value">
+                <div>
+                    <ul>
+                        <li v-for="icon in elementIcons" :key="icon" @click="iconClick('el-icon-' + icon)">
+                            <span><i :class="'el-icon-' + icon"></i></span>
+                        </li>
+                        <div class="clearfix"></div>
+                    </ul>
+                </div>
+            </el-option>
+        </el-select>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        value: {
+          type: String
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data() {
+        return {
+            elementIcons: [
+                'platform-eleme', 'eleme', 'delete-solid', 'delete',
+                's-tools', 'setting', 'user-solid', 'user',
+                'phone', 'phone-outline', 'more', 'more-outline',
+                'star-on', 'star-off', 's-goods', 'goods',
+                'warning', 'warning-outline', 'question', 'info',
+                'remove', 'circle-plus', 'success', 'error',
+                'zoom-in', 'zoom-out', 'remove-outline', 'circle-plus-outline',
+                'circle-check', 'circle-close', 's-help', 'help',
+                'minus', 'plus', 'check', 'close',
+                'picture', 'picture-outline', 'picture-outline-round', 'upload',
+                'upload2', 'download', 'camera-solid', 'camera',
+                'video-camera-solid', 'video-camera', 'message-solid', 'bell',
+                's-cooperation', 's-order', 's-platform', 's-fold',
+                's-unfold', 's-operation', 's-promotion', 's-home', 's-release',
+                's-ticket', 's-management', 's-open', 's-shop',
+                's-marketing', 's-flag', 's-comment', 's-finance',
+                's-claim', 's-custom', 's-opportunity', 's-data',
+                's-check', 's-grid', 'menu', 'share',
+                'd-caret', 'caret-left', 'caret-right', 'caret-bottom',
+                'caret-top', 'bottom-left', 'bottom-right', 'back', 'right',
+                'bottom', 'top', 'top-left', 'top-right', 'arrow-left',
+                'arrow-right', 'arrow-down', 'arrow-up', 'd-arrow-left',
+                'd-arrow-right', 'video-pause', 'video-play', 'refresh',
+                'refresh-right', 'refresh-left', 'finished', 'sort',
+                'sort-up', 'sort-down', 'rank', 'loading', 'view',
+                'c-scale-to-original', 'date', 'edit', 'edit-outline',
+                'folder', 'folder-opened', 'folder-add', 'folder-remove',
+                'folder-delete', 'folder-checked', 'tickets', 'document-remove',
+                'document-delete', 'document-copy', 'document-checked', 'document',
+                'document-add', 'printer', 'paperclip', 'takeaway-box',
+                'search', 'monitor', 'attract', 'mobile', 'scissors',
+                'umbrella', 'headset', 'brush', 'mouse', 'coordinate',
+                'magic-stick', 'reading', 'data-line', 'data-board', 'pie-chart',
+                'data-analysis', 'collection-tag', 'film', 'suitcase', 'suitcase-1',
+                'receiving', 'collection', 'files', 'notebook-1', 'notebook-2',
+                'toilet-paper', 'office-building', 'school', 'table-lamp', 'house',
+                'no-smoking', 'smoking', 'shopping-cart-full', 'shopping-cart-1',
+                'shopping-cart-2', 'shopping-bag-1', 'shopping-bag-2', 'sold-out',
+                'sell', 'present', 'box', 'bank-card', 'money', 'coin',
+                'wallet', 'discount', 'price-tag', 'news', 'guide',
+                'male', 'female', 'thumb', 'cpu', 'link', 'connection',
+                'open', 'turn-off', 'set-up', 'chat-round', 'chat-line-round',
+                'chat-square', 'chat-dot-round', 'chat-dot-square', 'chat-line-square',
+                'message', 'postcard', 'position', 'turn-off-microphone', 'microphone',
+                'close-notification', 'bangzhu', 'time', 'odometer', 'crop',
+                'aim', 'switch-button', 'full-screen', 'copy-document', 'mic',
+                'stopwatch', 'medal-1', 'medal', 'trophy', 'trophy-1',
+                'first-aid-kit', 'discover', 'place', 'location', 'location-outline',
+                'location-information', 'add-location', 'delete-location', 'map-location',
+                'alarm-clock', 'timer', 'watch-1', 'watch', 'lock', 'unlock',
+                'key', 'service', 'mobile-phone', 'bicycle', 'truck', 'ship',
+                'basketball', 'football', 'soccer', 'baseball', 'wind-power',
+                'light-rain', 'lightning', 'heavy-rain', 'sunrise', 'sunrise-1',
+                'sunset', 'sunny', 'cloudy', 'partly-cloudy', 'cloudy-and-sunny',
+                'moon', 'moon-night', 'dish', 'dish-1', 'food', 'chicken',
+                'fork-spoon', 'knife-fork', 'burger', 'tableware', 'sugar',
+                'dessert', 'ice-cream', 'hot-water', 'water-cup', 'coffee-cup',
+                'cold-drink', 'goblet', 'goblet-full', 'goblet-square', 'goblet-square-full',
+                'refrigerator', 'grape', 'watermelon', 'cherry', 'apple',
+                'pear', 'orange', 'coffee', 'ice-tea', 'ice-drink',
+                'milk-tea', 'potato-strips', 'lollipop', 'ice-cream-square', 'ice-cream-round'
+            ]
+        }
+    },
+    methods: {
+        iconClick(iconName) {
+            this.$emit('update:value', iconName);
+            this.$emit('change', iconName);
+        },
+        clearHandle() {
+            this.$emit('update:value', '');
+            this.$emit('change', '');
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.clearfix {
+  clear: both;
+}
+
+.icon-picker-option.el-select-dropdown__item {
+  width: 307px;
+  height: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0;
+  font-size: 16px;
+}
+
+.icon-picker-option.el-select-dropdown__item.hover, .icon-picker-option.el-select-dropdown__item:hover {
+  background-color: #fff;
+  cursor: default;
+}
+
+.icon-picker-option.el-select-dropdown__item.selected {
+  color: #606266;
+  font-weight: normal;
+}
+
+.icon-picker-option::-webkit-scrollbar {
+  width: 7px;
+  background-color: #eee;
+}
+
+.icon-picker-option::-webkit-scrollbar-track {
+  background-color: #eee;
+}
+
+.icon-picker-option::-webkit-scrollbar-thumb {
+  background: #d7d7d7;
+  border-radius: 7px;
+}
+
+.icon-picker-option > div {
+  cursor: default;
+}
+
+.icon-picker-option ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-picker-option ul > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.icon-picker-option ul > li:hover {
+  color: #327edb;
+  font-size: 20px;
+}
+
+.icon-picker-selected > i {
+  color: #333333;
+  line-height: 40px;
+  margin-left: 6px;
+  font-size: 16px;
+}
+</style>
