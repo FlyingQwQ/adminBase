@@ -12,6 +12,13 @@ public interface ResourceButtonService {
     Result findAllResourceButton(PaginationRequest paginationRequest);
 
     /**
+     * 获取当前用户角色的资源按钮
+     * @param menuId 菜单ID
+     * @return 资源按钮列表
+     */
+    Result findUserResourceButtonByMenuId(int menuId);
+
+    /**
      * 通过菜单ID查询资源按钮
      * @param menuId 菜单ID
      * @return 资源按钮列表

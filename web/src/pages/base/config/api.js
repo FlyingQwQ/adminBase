@@ -30,8 +30,9 @@ let api = {
     addMenu: `${host}/menu/addMenu`, // 添加菜单
     deleteMenu: `${host}/menu/deleteMenu`, // 删除菜单
 
+    getUserResourceButtonByMenuId: `${host}/resourcebutton/findUserResourceButtonByMenuId`, // 获取用户角色资源按钮
     findAllResourceButton: `${host}/resourcebutton/findAllResourceButton`, // 查询全部资源按钮
-    findResourceButtonByMenuId: `${host}/resourcebutton/findResourceButtonByMenuId`, // 通过菜单ID查询资源按钮
+    findResourceButtonByMenuId: `${host}/resourcebutton/findResourceButtonByMenuId`, // 通过菜单ID查询资源按钮 - 【*不通过角色】
     addResourceButtonByMenuId: `${host}/resourcebutton/addResourceButtonByMenuId`, // 给菜单添加资源按钮
     deleteResourceButtonByMenuId: `${host}/resourcebutton/deleteResourceButtonByMenuId`, // 通过菜单ID删除资源按钮
     addResourceButton: `${host}/resourcebutton/addResourceButton`, // 新增资源按钮

@@ -1,9 +1,16 @@
 <!-- 主框架 -->
 <template>
+  <el-container>
+    <el-aside width="200px">
+      <div class="logo-box">
+        <span class="systemName">{{ systemName }}</span>
+      </div>
+      <!-- 侧边栏 -->
+      <Menu></Menu>
+    </el-aside>
     <el-container>
       <el-header>
         <!-- 头部 -->
-        <span class="systemName">{{ systemName }}</span>
         <el-popover
           placement="top-start"
           width="200"
@@ -20,37 +27,30 @@
           <span class="welcome" slot="reference">欢迎您，{{ $store.state.user.userInfo.userName }}</span>
         </el-popover>
       </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <!-- 侧边栏 -->
-          <Menu></Menu>
-        </el-aside>
-        <el-container>
-          <el-main>
-            <!-- 内容主体 -->
-            <el-tabs 
-              v-model="$store.state.tabs.activityTabs.name" 
-              type="border-card" 
-              @tab-click="tabClick"
-              @tab-remove="tabRemove">
-              <el-tab-pane
-                v-for="(item, index) in $store.state.tabs.tabsList"
-                :closable="item.closable"
-                :name="item.name"
-                :key="item.name">
-                <template #label>
-                  <span style="font-size: 13px;">{{ item.name }}</span>
-                  <i style="margin-left: 3px;" v-if="item.name === $store.state.tabs.activityTabs.name" class="el-icon-refresh" @click.stop="refreshPage"></i>
-                </template>
-              </el-tab-pane>
-            </el-tabs>
-            <KeepAlive>
-              <router-view :key="$route.fullPath"></router-view>
-            </KeepAlive>
-          </el-main>
-        </el-container>
-      </el-container>
+      <el-main>
+        <!-- 内容主体 -->
+        <el-tabs 
+          v-model="$store.state.tabs.activityTabs.name" 
+          type="border-card" 
+          @tab-click="tabClick"
+          @tab-remove="tabRemove">
+          <el-tab-pane
+            v-for="(item, index) in $store.state.tabs.tabsList"
+            :closable="item.closable"
+            :name="item.name"
+            :key="item.name">
+            <template #label>
+              <span style="font-size: 13px;">{{ item.name }}</span>
+              <i style="margin-left: 3px;" v-if="item.name === $store.state.tabs.activityTabs.name" class="el-icon-refresh" @click.stop="refreshPage"></i>
+            </template>
+          </el-tab-pane>
+        </el-tabs>
+        <KeepAlive>
+          <router-view :key="$route.fullPath"></router-view>
+        </KeepAlive>
+      </el-main>
     </el-container>
+  </el-container>
 </template>
   
 <script>
@@ -102,6 +102,22 @@ export default {
   .el-aside {
     border-right: 1px solid #E4E7ED;
     overflow: hidden;
+
+    .logo-box {
+      height: 60px;
+      background-color: #409EFF;
+      display: flex;
+      justify-content: center;
+
+      .systemName {
+        color: #fff;
+        font-size: 20px;
+        line-height: 60px;
+        display: inline-block;
+      }
+
+    }
+
   }
   
 
@@ -129,6 +145,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row-reverse;
     color: #fff;
 
     .systemName {

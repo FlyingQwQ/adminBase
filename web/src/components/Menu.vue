@@ -1,10 +1,11 @@
 <template>
     <el-menu
-    class="el-menu-vertical-demo"
-    :default-active="$store.state.tabs.activityTabs.url"
-    @open="handleOpen"
-    @close="handleClose"
-    @select="handleSelect">
+        :collapse="false"
+        class="el-menu-vertical-demo"
+        :default-active="$store.state.tabs.activityTabs.url"
+        @open="handleOpen"
+        @close="handleClose"
+        @select="handleSelect">
         <template v-for="item in menuList">
             <MenuItem :item="item" :key="item.name"></MenuItem>
         </template>
@@ -51,4 +52,5 @@ export default {
 .el-menu {
     border-right: none;
 }
+
 </style>

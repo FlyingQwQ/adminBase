@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         loadResourceButtonList(id) {
-            fetch.findResourceButtonByMenuId({
+            fetch.getUserResourceButtonByMenuId({
                 menuId: this.$route.query.menuId
             }).then((res) => {
                 this.resourceButtonList = res.data ?? [];

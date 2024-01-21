@@ -29,8 +29,14 @@ public class ResourceButtonController {
         return this.resourceButtonService.findAllResourceButton(paginationRequest);
     }
 
-    @RequestMapping(path = "/findResourceButtonByMenuId")
+    @RequestMapping(path = "/findUserResourceButtonByMenuId")
     @SaCheckLogin
+    public Result findUserResourceButtonByMenuId(@RequestParam int menuId) {
+        return this.resourceButtonService.findUserResourceButtonByMenuId(menuId);
+    }
+
+    @RequestMapping(path = "/findResourceButtonByMenuId")
+    @SaCheckPermission("ResourceButton.findResourceButtonByMenuId")
     public Result findResourceButtonByMenuId(@RequestParam int menuId) {
         return this.resourceButtonService.findResourceButtonByMenuId(menuId);
     }

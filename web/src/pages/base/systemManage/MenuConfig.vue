@@ -171,12 +171,6 @@ export default {
                 key: 'parentId',
                 type: 'slot',
                 span: 8
-            },
-            {
-                label: '菜单图标',
-                key: 'icon',
-                type: 'slot',
-                span: 8
             }
         ],
 

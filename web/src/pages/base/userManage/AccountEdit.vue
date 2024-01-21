@@ -1,13 +1,23 @@
+<!-- 账号编辑 -->
 <template>
     <div>
-        账号编辑
+        <ResourceButton :config="resourceButtonConfig"></ResourceButton>
     </div>
 </template>
 
 <script>
 
 export default {
-  
+    data() {
+        return {
+            resourceButtonConfig: {
+                save: { 
+                    disabled: true,
+                    click: this.save 
+                }
+            }
+        }
+    }
 }
 </script>
   

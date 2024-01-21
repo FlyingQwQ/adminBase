@@ -1,26 +1,32 @@
 package top.kuoer.base.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
-import top.kuoer.base.entity.PaginationRequest;
-import top.kuoer.base.entity.ResourceButtonEntity;
+import top.kuoer.base.entity.*;
+import top.kuoer.base.mapper.AuthorizeMapper;
 import top.kuoer.base.mapper.ResourceButtonMapper;
 import top.kuoer.base.service.ResourceButtonService;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ResourceButtonServiceImpl implements ResourceButtonService {
 
     private final ResourceButtonMapper resourceButtonMapper;
+    private final AuthorizeMapper authorizeMapper;
 
     @Autowired
-    public ResourceButtonServiceImpl(ResourceButtonMapper resourceButtonMapper) {
+    public ResourceButtonServiceImpl(ResourceButtonMapper resourceButtonMapper, AuthorizeMapper authorizeMapper) {
         this.resourceButtonMapper = resourceButtonMapper;
+        this.authorizeMapper = authorizeMapper;
     }
 
     @Override
@@ -34,10 +40,36 @@ public class ResourceButtonServiceImpl implements ResourceButtonService {
     }
 
     @Override
+    public Result findUserResourceButtonByMenuId(int menuId) {
+        int userId = Integer.parseInt((String) StpUtil.getLoginId());
+        List<Role> roles = this.authorizeMapper.findRolesByUserId(userId);
+
+        List<ResourceButtonEntity> resourceButtonList = this.resourceButtonMapper.findResourceButtonByMenuId(menuId);
+        Set<ResourceButtonEntity> roleResourceButtonSet = new HashSet<>();
+
+        for(Role role : roles) {
+            List<RoleMenuResourceButtonQuery> roleMenuResourceButtonQueries = this.authorizeMapper.findRoleMenuResourceButtonByRoleId(role.getId());
+            for(ResourceButtonEntity resourceButton : resourceButtonList) {
+                for(RoleMenuResourceButtonQuery roleMenuResourceButtonQuery : roleMenuResourceButtonQueries) {
+                    if(resourceButton.getId() == roleMenuResourceButtonQuery.getResourceId() && roleMenuResourceButtonQuery.getMenuId() == menuId) {
+                        roleResourceButtonSet.add(resourceButton);
+                    }
+                }
+            }
+        }
+
+        List<ResourceButtonEntity> roleResourceButtonList = new ArrayList<>(roleResourceButtonSet);
+        if(!roleResourceButtonList.isEmpty()) {
+            return new Result(ResultCode.SUCCESS, roleResourceButtonList);
+        }
+        return new Result(ResultCode.NOTFOUND, null);
+    }
+
+    @Override
     public Result findResourceButtonByMenuId(int menuId) {
-        List<ResourceButtonEntity> ResourceButtonList = this.resourceButtonMapper.findResourceButtonByMenuId(menuId);
-        if(!ResourceButtonList.isEmpty()) {
-            return new Result(ResultCode.SUCCESS, ResourceButtonList);
+        List<ResourceButtonEntity> resourceButtonList = this.resourceButtonMapper.findResourceButtonByMenuId(menuId);
+        if(!resourceButtonList.isEmpty()) {
+            return new Result(ResultCode.SUCCESS, resourceButtonList);
         }
         return new Result(ResultCode.NOTFOUND, null);
     }
