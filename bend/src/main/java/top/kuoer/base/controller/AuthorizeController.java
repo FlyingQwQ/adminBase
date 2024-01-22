@@ -4,11 +4,11 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.kuoer.base.common.Result;
-import top.kuoer.base.entity.*;
+import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.entity.Permission;
+import top.kuoer.base.model.entity.Role;
+import top.kuoer.base.model.vo.RoleMenu;
 import top.kuoer.base.service.AuthorizeService;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/authorize", method = {RequestMethod.POST})
@@ -121,8 +121,8 @@ public class AuthorizeController {
 
     @RequestMapping(path = "/setRoleMenu")
     @SaCheckPermission("authorize.setRoleMenu")
-    public Result setRoleMenu(@RequestBody RoleMenuEntity roleMenuEntity) {
-        return this.authorizeService.setRoleMenu(roleMenuEntity);
+    public Result setRoleMenu(@RequestBody RoleMenu roleMenu) {
+        return this.authorizeService.setRoleMenu(roleMenu);
     }
 
 

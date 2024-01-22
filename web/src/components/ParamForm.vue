@@ -7,12 +7,14 @@
                         :prop="item.key"
                         :label="item.label" 
                         v-if="
-                            item.type === 'text'
+                            item.type === 'text' ||
+                            item.type === 'password'
                         ">
                         <el-input 
                             v-model="form[item.key]"
                             :disabled="item.disabled"
-                            :placeholder="item.placeholder">
+                            :placeholder="item.placeholder"
+                            :type="item.type">
                         </el-input>
                     </el-form-item>
 
@@ -89,6 +91,9 @@ export default {
         },
         setFormValue(key, value){
             this.$set(this.form, key, value);
+        },
+        setFormValues(values){
+            this.form = values;
         },
         validate() {
             return this.$refs.form.validate();

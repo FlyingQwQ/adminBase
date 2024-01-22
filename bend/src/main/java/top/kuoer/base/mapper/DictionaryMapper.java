@@ -4,8 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-import top.kuoer.base.entity.DictionaryEntity;
-import top.kuoer.base.entity.DictionaryItemEntity;
+import top.kuoer.base.model.entity.DictionaryEntity;
+import top.kuoer.base.model.entity.DictionaryItemEntity;
 
 import java.util.List;
 

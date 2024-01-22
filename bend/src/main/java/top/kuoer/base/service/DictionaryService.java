@@ -1,7 +1,7 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
-import top.kuoer.base.entity.PaginationRequest;
+import top.kuoer.base.model.vo.PaginationRequest;
 
 public interface DictionaryService {
 

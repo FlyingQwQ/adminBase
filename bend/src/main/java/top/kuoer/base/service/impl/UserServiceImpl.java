@@ -5,13 +5,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.kuoer.base.entity.PaginationRequest;
-import top.kuoer.base.entity.UserInfo;
+import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.entity.UserInfo;
 import top.kuoer.base.mapper.UserMapper;
 import top.kuoer.base.service.UserService;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
-import top.kuoer.base.entity.LoginResultEntity;
+import top.kuoer.base.model.vo.LoginResult;
 import top.kuoer.base.utils.AuthorizeTools;
 
 @Service
@@ -32,17 +32,17 @@ public class UserServiceImpl implements UserService {
         if(null != userId) {
             StpUtil.login(userId);
 
-            LoginResultEntity loginResultEntity = new LoginResultEntity();
-            LoginResultEntity.Authorize authorize = new LoginResultEntity.Authorize();
+            LoginResult loginResult = new LoginResult();
+            LoginResult.Authorize authorize = new LoginResult.Authorize();
             authorize.setRoles(authorizeTools.findRolesByUserId(userId));
             authorize.setPermissions(authorizeTools.findPermissionsByUserId(userId));
 
-            loginResultEntity.setUserId(userId);
-            loginResultEntity.setUserName(userName);
-            loginResultEntity.setToken(StpUtil.getTokenInfo().getTokenValue());
-            loginResultEntity.setAuthorize(authorize);
+            loginResult.setUserId(userId);
+            loginResult.setUserName(userName);
+            loginResult.setToken(StpUtil.getTokenInfo().getTokenValue());
+            loginResult.setAuthorize(authorize);
 
-            return new Result(ResultCode.SUCCESS, loginResultEntity);
+            return new Result(ResultCode.SUCCESS, loginResult);
         }
         return new Result(ResultCode.LOGINFAIL, "登陆失败");
     }
@@ -75,6 +75,16 @@ public class UserServiceImpl implements UserService {
     public Result getAllUserInfo(PaginationRequest paginationRequest) {
         PageHelper.startPage(paginationRequest.getPageNum(), paginationRequest.getPageSize());
         return new Result(ResultCode.SUCCESS, PageInfo.of(this.userMapper.getAllUserInfo()));
+    }
+
+    @Override
+    public Result getUserInfo(int userId) {
+        UserInfo userInfo = this.userMapper.getUserInfoById(userId);
+        if(null != userInfo) {
+            userInfo.setPassword(null);
+            return new Result(ResultCode.SUCCESS, userInfo);
+        }
+        return new Result(ResultCode.NOTFOUND, null);
     }
 
     @Override

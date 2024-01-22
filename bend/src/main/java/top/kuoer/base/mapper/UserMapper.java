@@ -2,7 +2,7 @@ package top.kuoer.base.mapper;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import top.kuoer.base.entity.UserInfo;
+import top.kuoer.base.model.entity.UserInfo;
 
 import java.util.List;
 
@@ -21,6 +21,9 @@ public interface UserMapper {
 
     @Select("SELECT id, username FROM user")
     List<UserInfo> getAllUserInfo();
+
+    @Select("SELECT * FROM user where id=#{id}")
+    UserInfo getUserInfoById(@Param("id") int userId);
 
     @Delete("delete from user where id=#{id}")
     boolean delete(@Param("id") int userId);

@@ -1,9 +1,10 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
-import top.kuoer.base.entity.*;
-
-import java.util.List;
+import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.entity.Permission;
+import top.kuoer.base.model.entity.Role;
+import top.kuoer.base.model.vo.RoleMenu;
 
 public interface AuthorizeService {
 
@@ -120,9 +121,9 @@ public interface AuthorizeService {
 
     /**
      * 设置角色菜单
-     * @param roleMenuEntity 选择的数据
+     * @param roleMenu 选择的数据
      * @return 是否成功
      */
-    Result setRoleMenu(RoleMenuEntity roleMenuEntity);
+    Result setRoleMenu(RoleMenu roleMenu);
 
 }

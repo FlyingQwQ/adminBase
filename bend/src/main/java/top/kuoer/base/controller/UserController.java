@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import top.kuoer.base.entity.PaginationRequest;
+import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.service.UserService;
 import top.kuoer.base.common.Result;
 
@@ -43,6 +43,12 @@ public class UserController {
     @SaCheckPermission("user.getAllUserInfo")
     public Result getAllUserInfo(PaginationRequest paginationRequest) {
         return this.userService.getAllUserInfo(paginationRequest);
+    }
+
+    @RequestMapping(path = "/getUserInfo")
+    @SaCheckPermission("user.getUserInfo")
+    public Result getUserInfo(@RequestParam int userId) {
+        return this.userService.getUserInfo(userId);
     }
 
     @RequestMapping(path = "/deleteUser")

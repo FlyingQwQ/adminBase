@@ -2,7 +2,7 @@ package top.kuoer.base.mapper;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import top.kuoer.base.entity.ResourceButtonEntity;
+import top.kuoer.base.model.entity.ResourceButtonEntity;
 
 import java.util.List;
 

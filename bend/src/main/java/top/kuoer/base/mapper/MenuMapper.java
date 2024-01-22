@@ -2,7 +2,7 @@ package top.kuoer.base.mapper;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import top.kuoer.base.entity.Menu;
+import top.kuoer.base.model.entity.Menu;
 
 import java.util.List;
 

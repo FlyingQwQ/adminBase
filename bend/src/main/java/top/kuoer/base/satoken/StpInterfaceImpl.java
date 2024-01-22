@@ -3,8 +3,8 @@ package top.kuoer.base.satoken;
 import cn.dev33.satoken.stp.StpInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import top.kuoer.base.entity.Role;
-import top.kuoer.base.entity.Permission;
+import top.kuoer.base.model.entity.Role;
+import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.utils.AuthorizeTools;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
-import top.kuoer.base.entity.PaginationRequest;
+import top.kuoer.base.model.vo.PaginationRequest;
 
 public interface UserService {
 
@@ -31,6 +31,13 @@ public interface UserService {
      * @return 用户列表
      */
     Result getAllUserInfo(PaginationRequest paginationRequest);
+
+    /**
+     * 获取用户信息
+     * @param userId 用户ID
+     * @return 用户信息
+     */
+    Result getUserInfo(int userId);
 
     /**
      * 删除指定用户

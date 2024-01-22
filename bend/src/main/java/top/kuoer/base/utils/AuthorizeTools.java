@@ -2,9 +2,9 @@ package top.kuoer.base.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import top.kuoer.base.entity.Role;
+import top.kuoer.base.model.entity.Role;
 import top.kuoer.base.mapper.AuthorizeMapper;
-import top.kuoer.base.entity.Permission;
+import top.kuoer.base.model.entity.Permission;
 
 import java.util.ArrayList;
 import java.util.List;

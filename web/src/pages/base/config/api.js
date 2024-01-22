@@ -8,6 +8,7 @@ let api = {
     logout: `${host}/user/logout`, // 注销登录
     getAllUserInfo: `${host}/user/getAllUserInfo`, // 查询所有用户
     deleteUser: `${host}/user/deleteUser`, // 删除账号
+    getUserInfoById: `${host}/user/getUserInfo`, // 查询用户信息
     
     findRoles: `${host}/authorize/findRoles`, // 获取指定用户的角色列表
     findAllRoles: `${host}/authorize/findAllRoles`, // 获取所有角色列表

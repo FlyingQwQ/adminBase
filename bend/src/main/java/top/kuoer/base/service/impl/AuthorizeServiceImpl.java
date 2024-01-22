@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
-import top.kuoer.base.entity.*;
 import top.kuoer.base.mapper.AuthorizeMapper;
 import top.kuoer.base.mapper.MenuMapper;
 import top.kuoer.base.mapper.ResourceButtonMapper;
+import top.kuoer.base.model.entity.*;
+import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.RoleMenu;
+import top.kuoer.base.model.vo.RoleResourceButton;
 import top.kuoer.base.service.AuthorizeService;
 
 import java.util.List;
@@ -178,15 +181,15 @@ public class AuthorizeServiceImpl implements AuthorizeService {
 
     @Override
     @Transactional
-    public Result setRoleMenu(RoleMenuEntity roleMenuEntity) {
-        int roleId = roleMenuEntity.getRoleId();
+    public Result setRoleMenu(RoleMenu roleMenu) {
+        int roleId = roleMenu.getRoleId();
 
         this.authorizeMapper.deleteAllRoleMenuByRoleId(roleId);
-        for(int menuId : roleMenuEntity.getMenus()) {
+        for(int menuId : roleMenu.getMenus()) {
             this.authorizeMapper.addRoleMenu(roleId, menuId);
         }
         this.authorizeMapper.deleteAllRoleMenuResourceButtonByMenuId(roleId);
-        for(RoleResourceButtonEntity resourceButton : roleMenuEntity.getResourceButtons()) {
+        for(RoleResourceButton resourceButton : roleMenu.getResourceButtons()) {
             this.authorizeMapper.addRoleMenuResourceButton(roleId, resourceButton.getResourceId(), resourceButton.getMenuId());
         }
 

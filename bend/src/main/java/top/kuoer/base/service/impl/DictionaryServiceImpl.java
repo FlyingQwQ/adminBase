@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
-import top.kuoer.base.entity.DictionaryEntity;
-import top.kuoer.base.entity.DictionaryItemEntity;
-import top.kuoer.base.entity.PaginationRequest;
+import top.kuoer.base.model.entity.DictionaryEntity;
+import top.kuoer.base.model.entity.DictionaryItemEntity;
+import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.mapper.DictionaryMapper;
 import top.kuoer.base.service.DictionaryService;
 

@@ -2,11 +2,10 @@ package top.kuoer.base.mapper;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-import top.kuoer.base.common.Result;
-import top.kuoer.base.entity.Role;
-import top.kuoer.base.entity.Permission;
-import top.kuoer.base.entity.RoleMenuQuery;
-import top.kuoer.base.entity.RoleMenuResourceButtonQuery;
+import top.kuoer.base.model.entity.Role;
+import top.kuoer.base.model.entity.Permission;
+import top.kuoer.base.model.entity.RoleMenuQuery;
+import top.kuoer.base.model.entity.RoleMenuResourceButtonQuery;
 
 import java.util.List;
 
