@@ -1,7 +1,9 @@
 package top.kuoer.base.service;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.UserRequest;
 
 public interface UserService {
 
@@ -45,4 +47,13 @@ public interface UserService {
      * @return 是否成功
      */
     Result delete(int userId);
+
+    /**
+     * 编辑账号
+     * @param userRequest 账号信息
+     * @return 是否成功
+     */
+    Result editUser(UserRequest userRequest);
+
+
 }

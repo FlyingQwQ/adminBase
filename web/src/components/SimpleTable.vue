@@ -30,7 +30,7 @@
             @size-change="handleSizeChange"
             @current-change="paginationChange"
             :current-page="currentPage"
-            :page-sizes="[20, 40, 60, 100]"
+            :page-sizes="[10, 20, 40, 60, 100]"
             :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total">
@@ -61,7 +61,7 @@ export default {
     data() {
         return {
             tableData: [],
-            pageSize: 20,
+            pageSize: 10,
             total: 0,
 
             currentPage: 1,

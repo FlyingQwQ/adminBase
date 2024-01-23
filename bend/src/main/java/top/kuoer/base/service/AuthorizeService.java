@@ -5,6 +5,7 @@ import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.model.entity.Role;
 import top.kuoer.base.model.vo.RoleMenu;
+import top.kuoer.base.model.vo.RolePermissionRequest;
 
 public interface AuthorizeService {
 
@@ -27,6 +28,13 @@ public interface AuthorizeService {
      * @return 权限列表
      */
     Result findPermissionsByUserId(int userId);
+
+    /**
+     * 根据角色ID查询权限
+     * @param roleId 权限ID
+     * @return 权限列表
+     */
+    Result findPermissionsByRoleId(int roleId);
 
     /**
      * 查询全部权限
@@ -75,11 +83,10 @@ public interface AuthorizeService {
 
     /**
      * 批量设置一个角色的权限，会覆盖原来的
-     * @param roleId 角色ID
-     * @param permissionIds 权限ID数组
+     * @param rolePermission 角色和权限ID
      * @return 是否成功
      */
-    Result setRolePermission(int roleId, int[] permissionIds);
+    Result setRolePermission(RolePermissionRequest rolePermission);
 
     /**
      * 删除指定角色

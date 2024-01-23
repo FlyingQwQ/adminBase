@@ -21,6 +21,10 @@ let router = [
         path: 'roleMenuManage',
         component: () => import('@/pages/base/userManage/RoleMenuManage.vue')
     },
+    {
+        path: 'rolePermissionManage',
+        component: () => import('@/pages/base/userManage/RolePermissionManage.vue')
+    },
 
     // ===============系统管理===============
     {

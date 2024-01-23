@@ -1,5 +1,6 @@
 <template>
     <el-menu
+        v-if="menuList.length > 0"
         :collapse="false"
         class="el-menu-vertical-demo"
         :default-active="$store.state.tabs.activityTabs.url"
@@ -10,6 +11,7 @@
             <MenuItem :item="item" :key="item.name"></MenuItem>
         </template>
     </el-menu>
+    <el-empty v-else :image-size="100" description="没有分配菜单"></el-empty>
 </template>
 
 <script>

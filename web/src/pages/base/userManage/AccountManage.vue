@@ -3,7 +3,40 @@
         <ResourceButton :config="resourceButtonConfig"></ResourceButton>
         <SimpleTable ref="table" :columns="columns" findApi="getAllUserInfo"></SimpleTable>
 
-
+        <el-dialog title="注册新账号" :visible.sync="addDialog">
+            <ParamForm 
+                ref="addParamForm" 
+                :params="[
+                    {
+                        label: '用户名',
+                        key: 'userName',
+                        type: 'text',
+                        span: 8
+                    },
+                    {
+                        label: '密码',
+                        key: 'password',
+                        type: 'password',
+                        span: 8
+                    },
+                    {
+                        label: '重复密码',
+                        key: 'confirmPassword',
+                        type: 'password',
+                        span: 8
+                    },
+                ]" 
+                :rules="{
+                    userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+                    confirmPassword: [{ required: true, message: '请输入重复密码', trigger: 'blur' }]
+                }">
+            </ParamForm>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="cancelDialog">取 消</el-button>
+                <el-button type="primary" :loading="addLoading" @click="addButtonOk">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -57,7 +90,11 @@ export default {
                         ]);
                     }
                 }
-            ]
+            ],
+
+            addDialog: false,
+            addLoading: false,
+
         }
     },
     mounted() {
@@ -69,7 +106,7 @@ export default {
         },
 
         add() {
-
+            this.addDialog = true;
         },
         modify(row) {
             tabsTool.openTab({ 
@@ -78,7 +115,7 @@ export default {
             });
         },
         delete(row) {
-            this.$confirm('此操作将永久删除该权限, 是否继续?', '提示', {
+            this.$confirm('此操作将永久删除该账号, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
@@ -95,6 +132,30 @@ export default {
                     }
                 });
             }).catch(() => {});
+        },
+
+        cancelDialog() {
+            this.addDialog = false;
+        },
+        addButtonOk() {
+            this.$refs.addParamForm.validate().then(() => {
+                let registerInfo = this.$refs.addParamForm.getFormValue();
+                if(registerInfo.password != registerInfo.confirmPassword) {
+                    this.$message.error('两次输入的密码不一致');
+                    return;
+                }
+                fetch.register({
+                    ...registerInfo
+                }).then((res) => {
+                    if(res.code == 1) {
+                        this.$message.success('添加成功');
+                        this.addDialog = false;
+                        this.init();
+                    }
+                });
+            }).catch((error) => {});
+            
+
         }
     }
 }

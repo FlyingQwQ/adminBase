@@ -5,9 +5,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import top.kuoer.base.mapper.AuthorizeMapper;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.entity.UserInfo;
 import top.kuoer.base.mapper.UserMapper;
+import top.kuoer.base.model.vo.UserRequest;
 import top.kuoer.base.service.UserService;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
@@ -18,11 +21,13 @@ import top.kuoer.base.utils.AuthorizeTools;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
+    private final AuthorizeMapper authorizeMapper;
     private final AuthorizeTools authorizeTools;
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, AuthorizeTools authorizeTools) {
+    public UserServiceImpl(UserMapper userMapper, AuthorizeMapper authorizeMapper, AuthorizeTools authorizeTools) {
         this.userMapper = userMapper;
+        this.authorizeMapper = authorizeMapper;
         this.authorizeTools = authorizeTools;
     }
 
@@ -93,6 +98,19 @@ public class UserServiceImpl implements UserService {
             return new Result(ResultCode.SUCCESS, "删除成功");
         }
         return new Result(ResultCode.OPERATIONFAIL, null);
+    }
+
+    @Override
+    @Transactional
+    public Result editUser(UserRequest userRequest) {
+
+        this.userMapper.editUser(userRequest);
+        this.authorizeMapper.deleteUserRole(userRequest.getId());
+        for(Integer roleId : userRequest.getRoles()) {
+            this.authorizeMapper.addRoleToUser(roleId, userRequest.getId());
+        }
+
+        return new Result(ResultCode.SUCCESS, "修改成功");
     }
 
 

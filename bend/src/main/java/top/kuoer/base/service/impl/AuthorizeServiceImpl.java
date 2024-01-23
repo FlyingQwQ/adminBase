@@ -13,9 +13,11 @@ import top.kuoer.base.mapper.ResourceButtonMapper;
 import top.kuoer.base.model.entity.*;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.vo.RoleMenu;
+import top.kuoer.base.model.vo.RolePermissionRequest;
 import top.kuoer.base.model.vo.RoleResourceButton;
 import top.kuoer.base.service.AuthorizeService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -49,7 +51,12 @@ public class AuthorizeServiceImpl implements AuthorizeService {
 
     @Override
     public Result findPermissionsByUserId(int userId) {
-        return new Result(ResultCode.SUCCESS, this.authorizeMapper.findPermissionsByRoleId(userId));
+        return null;
+    }
+
+    @Override
+    public Result findPermissionsByRoleId(int roleId) {
+        return new Result(ResultCode.SUCCESS, this.authorizeMapper.findPermissionsByRoleId(roleId));
     }
 
     @Override
@@ -105,10 +112,10 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     }
 
     @Override
-    public Result setRolePermission(int roleId, int[] permissionIds) {
-        this.authorizeMapper.deleteRolePermissionsByRoleId(roleId);
-        for (int permissionId : permissionIds) {
-            this.authorizeMapper.addPermissionToRole(permissionId, roleId);
+    public Result setRolePermission(RolePermissionRequest rolePermission) {
+        this.authorizeMapper.deleteRolePermissionsByRoleId(rolePermission.getRoleId());
+        for (int permissionId : rolePermission.getPermissionIds()) {
+            this.authorizeMapper.addPermissionToRole(permissionId, rolePermission.getRoleId());
         }
         return new Result(ResultCode.SUCCESS, "操作完成");
     }

@@ -10,8 +10,8 @@ spring:
 
 mybatis:
   type-aliases-package:
-    - top.kuoer.base.entity
-    - top.kuoer.camera.entity
+    - top.kuoer.base.model.entity
+  mapper-locations: classpath:mapper/*.xml
 
 sa-token:
   # token 名称（同时也是 cookie 名称）

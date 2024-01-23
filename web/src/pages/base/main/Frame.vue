@@ -20,7 +20,10 @@
               <el-row>
                 <el-col :span="24"><span>角色：</span></el-col>
               </el-row>
-              <el-tag v-for="role in $store.state.user.userInfo.authorize.roles" :key="role.id">{{ role.describe }}</el-tag>
+              <template v-if="$store.state.user.userInfo.authorize.roles.length > 0">
+                <el-tag v-for="role in $store.state.user.userInfo.authorize.roles" :key="role.id">{{ role.describe }}</el-tag>
+              </template>
+              <el-tag v-else type="warning">没有分配任何角色</el-tag>
             </div>
             <el-button type="text" @click="logout">退出登录</el-button>
           </div>

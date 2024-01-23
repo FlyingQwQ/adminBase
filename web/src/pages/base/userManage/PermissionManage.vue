@@ -191,6 +191,7 @@ export default {
                             message: '添加成功!'
                         });
                         this.init();
+                        this.$refs.addParamForm.resetForm();
                     }
                 }).finally(() => {
                     this.addLoading = false;
@@ -211,6 +212,7 @@ export default {
                             message: '修改成功!'
                         });
                         this.init();
+                        this.$refs.editParamForm.resetForm();
                     }
                 }).finally(() => {
                     this.editLoading = false;

@@ -2,11 +2,9 @@ package top.kuoer.base.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.UserRequest;
 import top.kuoer.base.service.UserService;
 import top.kuoer.base.common.Result;
 
@@ -57,6 +55,11 @@ public class UserController {
         return this.userService.delete(userId);
     }
 
+    @RequestMapping(path = "/editUser")
+    @SaCheckPermission("user.editUser")
+    public Result editUser(@RequestBody UserRequest userRequest) {
+        return this.userService.editUser(userRequest);
+    }
 
 
 }

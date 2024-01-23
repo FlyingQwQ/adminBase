@@ -8,6 +8,7 @@ import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.model.entity.Role;
 import top.kuoer.base.model.vo.RoleMenu;
+import top.kuoer.base.model.vo.RolePermissionRequest;
 import top.kuoer.base.service.AuthorizeService;
 
 @RestController
@@ -35,8 +36,14 @@ public class AuthorizeController {
 
     @RequestMapping(path = "/findPermissions")
     @SaCheckPermission("authorize.findPermissions")
-    public Result findPermissionsByUserId(int userId) {
+    public Result findPermissionsByUserId(@RequestParam int userId) {
         return this.authorizeService.findPermissionsByUserId(userId);
+    }
+
+    @RequestMapping(path = "/findPermissionsByRoleId")
+    @SaCheckPermission("authorize.findPermissionsByRoleId")
+    public Result findPermissionsByRoleId(@RequestParam int roleId) {
+        return this.authorizeService.findPermissionsByRoleId(roleId);
     }
 
 
@@ -80,8 +87,8 @@ public class AuthorizeController {
 
     @RequestMapping(path = "/setRolePermission")
     @SaCheckPermission("authorize.setRolePermission")
-    public Result setRolePermission(int roleId, int[] permissionIds) {
-        return this.authorizeService.setRolePermission(roleId, permissionIds);
+    public Result setRolePermission(@RequestBody RolePermissionRequest rolePermission) {
+        return this.authorizeService.setRolePermission(rolePermission);
     }
 
     @RequestMapping(path = "/deleteRole")

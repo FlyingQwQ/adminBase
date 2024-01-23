@@ -3,6 +3,7 @@ package top.kuoer.base.mapper;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import top.kuoer.base.model.entity.UserInfo;
+import top.kuoer.base.model.vo.UserRequest;
 
 import java.util.List;
 
@@ -27,5 +28,7 @@ public interface UserMapper {
 
     @Delete("delete from user where id=#{id}")
     boolean delete(@Param("id") int userId);
+
+    boolean editUser(UserRequest user);
 
 }

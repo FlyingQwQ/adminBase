@@ -43,7 +43,7 @@ public interface AuthorizeMapper {
     @Insert("insert into role_permissions (roleid, permissionid) values (#{roleId}, #{permissionId})")
     boolean addPermissionToRole(@Param("permissionId") int permissionId, @Param("roleId") int roleId);
 
-    @Insert("insert into user_roles (userid, roleid) values (#{roleId}, #{userId})")
+    @Insert("insert into user_roles (userid, roleid) values (#{userId}, #{roleId})")
     boolean addRoleToUser(@Param("roleId") int roleId, @Param("userId") int userId);
 
 

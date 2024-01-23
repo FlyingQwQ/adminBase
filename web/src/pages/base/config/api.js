@@ -9,6 +9,7 @@ let api = {
     getAllUserInfo: `${host}/user/getAllUserInfo`, // 查询所有用户
     deleteUser: `${host}/user/deleteUser`, // 删除账号
     getUserInfoById: `${host}/user/getUserInfo`, // 查询用户信息
+    editUser: `${host}/user/editUser`, // 编辑用户
     
     findRoles: `${host}/authorize/findRoles`, // 获取指定用户的角色列表
     findAllRoles: `${host}/authorize/findAllRoles`, // 获取所有角色列表
@@ -17,10 +18,12 @@ let api = {
     editRole: `${host}/authorize/editRole`, // 编辑角色
 
     findPermissions: `${host}/authorize/findPermissions`, // 获取指定用户的权限列表
+    findPermissionsByRoleId: `${host}/authorize/findPermissionsByRoleId`, // 获取指定角色的权限列表
     findAllPermissions: `${host}/authorize/findAllPermissions`, // 获取所有权限列表
     addPermission: `${host}/authorize/addPermission`, // 新建权限
     deletePermission: `${host}/authorize/deletePermission`, // 删除权限
     editPermission: `${host}/authorize/editPermission`, // 修改权限
+    setRolePermission: `${host}/authorize/setRolePermission`, // 批量添加权限到角色
     
     getAllRoleMenu: `${host}/authorize/getAllRoleMenu`, // 获取角色菜单
     setRoleMenu: `${host}/authorize/setRoleMenu`, // 设置角色菜单
