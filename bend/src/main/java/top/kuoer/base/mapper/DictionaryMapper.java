@@ -1,8 +1,6 @@
 package top.kuoer.base.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import top.kuoer.base.model.entity.DictionaryEntity;
 import top.kuoer.base.model.entity.DictionaryItemEntity;
@@ -18,5 +16,14 @@ public interface DictionaryMapper {
 
     @Select("SELECT dictionary_item.* FROM dictionary JOIN dictionary_item ON dictionary.id = dictionary_item.dictionaryId WHERE dictionary.code = #{code}")
     List<DictionaryItemEntity> findDictionaryItemByCode(@Param("code") String code);
+
+    @Insert("insert into dictionary (name, code, describe) values (#{dictionary.name}, #{dictionary.code}, #{dictionary.describe})")
+    boolean addDictionary(@Param("dictionary") DictionaryEntity entity);
+
+    @Delete("delete from dictionary where id=#{id}")
+    boolean deleteDictionary(@Param("id") int id);
+
+    @Update("update dictionary set name=#{dictionary.name}, code=#{dictionary.code}, describe=#{dictionary.describe} where id=#{dictionary.id}")
+    boolean editDictionary(@Param("dictionary") DictionaryEntity entity);
 
 }

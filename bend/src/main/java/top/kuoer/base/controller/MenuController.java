@@ -39,8 +39,9 @@ public class MenuController {
                              @RequestParam String name,
                              @RequestParam String url,
                              @RequestParam int parentId,
-                             String icon) {
-        return this.menuService.modifyMenu(menuId, name, url, parentId, icon);
+                             String icon,
+                             @RequestParam int sort) {
+        return this.menuService.modifyMenu(menuId, name, url, parentId, icon, sort);
     }
 
     @RequestMapping(path = "/addMenu")

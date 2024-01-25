@@ -22,13 +22,16 @@ export default class tabsTool {
 
     static closeTab(name) {
         store.commit('SET_TABS_LIST', store.state.tabs.tabsList.filter((item) => item.name !== name));
-        let activityTabs = store.state.tabs.tabsList[store.state.tabs.tabsList.length - 1];
-        this.selectTab(activityTabs.name);
+        if(this.getCurrentTabInfo().name == name) {
+            let activityTabs = store.state.tabs.tabsList[store.state.tabs.tabsList.length - 1];
+            this.selectTab(activityTabs.name);
+        }
     }
 
     static selectTab(name) {
         let tabsList = store.state.tabs.tabsList;
         let tabInfo = JSON.parse(JSON.stringify(tabsList.find((item) => item.name === name)));
+        
         // 切换路由
         router.push({path: tabInfo.url, query: {
             cacheKey: tabInfo.cacheKey,
@@ -37,6 +40,8 @@ export default class tabsTool {
         }});
         // 切换标签页
         store.commit('SET_ACTIVITY_TAB', tabInfo);
+        // 设置面包屑
+        store.commit('SET_BREADCRUMB', tabInfo.breadcrumb);
     }
 
     static getCurrentTabInfo() {
@@ -52,6 +57,14 @@ export default class tabsTool {
         let activityTabs = this.getCurrentTabInfo();
         store.commit('RESET_TAB_CACHEKEY', activityTabs.name);
         this.selectTab(activityTabs.name);
+    }
+
+    static closeAllTab() {
+        this.selectTab('首页')   
+        let closeTabs = JSON.parse(JSON.stringify(store.state.tabs.tabsList.filter((item) => item.name !== '首页')));
+        closeTabs.forEach((item) => {
+            this.closeTab(item.name);
+        });
     }
 
 }

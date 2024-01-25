@@ -11,6 +11,10 @@
     <el-container>
       <el-header>
         <!-- 头部 -->
+        <el-breadcrumb>
+          <el-breadcrumb-item><a href="/" class="home">首页</a></el-breadcrumb-item>
+          <el-breadcrumb-item v-for="item in $store.state.tabs.breadcrumb" :key="item">{{ item }}</el-breadcrumb-item>
+        </el-breadcrumb>
         <el-popover
           placement="top-start"
           width="200"
@@ -81,6 +85,7 @@ export default {
     logout() {
       fetch.logout().then((res) => {
         if(res.code == 1) {
+          tabsTool.closeAllTab();
           this.$router.push({ path: '/login' });
           this.$store.commit('CLEAR_USER_INFO');
         }
@@ -148,12 +153,27 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    // flex-direction: row-reverse;
     color: #fff;
 
     .systemName {
       font-weight: bold;
       font-size: 1.6rem;
+    }
+
+    .el-breadcrumb .home {
+      color: #ffffff;
+      font-weight:400 !important;
+    }
+
+    .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+      color: #ffffff !important;
+      font-weight:400 !important;
+    }
+    /* 被选中时的颜色 */
+    .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+      color: #ffffff !important;
+      font-weight:800 !important;
     }
 
   }

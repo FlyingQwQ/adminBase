@@ -8,7 +8,8 @@
                         :label="item.label" 
                         v-if="
                             item.type === 'text' ||
-                            item.type === 'password'
+                            item.type === 'password' ||
+                            item.type === 'number'
                         ">
                         <el-input 
                             v-model="form[item.key]"

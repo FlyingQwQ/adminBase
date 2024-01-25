@@ -14,8 +14,7 @@ import top.kuoer.base.mapper.MenuMapper;
 import top.kuoer.base.mapper.ResourceButtonMapper;
 import top.kuoer.base.service.MenuService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -38,24 +37,28 @@ public class MenuServiceImpl implements MenuService {
         List<Role> roles = this.authorizeMapper.findRolesByUserId(userId);
 
         List<Menu> allMenuList = this.menuMapper.getAllMenu();
-        List<Menu> RoleMenu = new ArrayList<>();
+        Set<Menu> roleMenuSet = new HashSet<>();
 
         for(Role role : roles) {
             List<RoleMenuQuery> roleMenuQueries = this.authorizeMapper.findRoleMenuByRoleId(role.getId());
             for(RoleMenuQuery roleMenuQuery : roleMenuQueries) {
                 for(Menu menu : allMenuList) {
                     if(roleMenuQuery.getMenuId() == menu.getId()) {
-                        RoleMenu.add(menu);
+                        roleMenuSet.add(menu);
                     }
                 }
             }
         }
 
+        List<Menu> roleMenu = new ArrayList<>(roleMenuSet);
+
         //  一级菜单
-        List<Menu> parentList = RoleMenu.stream().filter(e -> e.getParentId() == 0).toList();
+        List<Menu> parentList = roleMenu.stream().filter(e -> e.getParentId() == 0)
+                .sorted(Comparator.comparingInt(Menu::getSort))
+                .toList();
         //  递归调用，为所有一级菜单设置子菜单
         for (Menu menu : parentList) {
-            menu.setChildren(getChild(menu.getId(), RoleMenu));
+            menu.setChildren(getChild(menu.getId(), roleMenu));
         }
         return new Result(ResultCode.SUCCESS, parentList);
     }
@@ -65,7 +68,9 @@ public class MenuServiceImpl implements MenuService {
         List<Menu> allMenuList = this.menuMapper.getAllMenu();
 
         //  一级菜单
-        List<Menu> parentList = allMenuList.stream().filter(e -> e.getParentId() == 0).toList();
+        List<Menu> parentList = allMenuList.stream().filter(e -> e.getParentId() == 0)
+                .sorted(Comparator.comparingInt(Menu::getSort))
+                .toList();
         //  递归调用，为所有一级菜单设置子菜单
         for (Menu menu : parentList) {
             menu.setChildren(getChild(menu.getId(), allMenuList));
@@ -73,9 +78,32 @@ public class MenuServiceImpl implements MenuService {
         return new Result(ResultCode.SUCCESS, parentList);
     }
 
+    public static List<Menu> getChild(Integer id, List<Menu> allList) {
+        //  子菜单
+        List<Menu> childList = new ArrayList<>();
+        for (Menu menu : allList) {
+            if (menu.getParentId() == id) {
+                childList.add(menu);
+            }
+        }
+
+        childList.sort(Comparator.comparingInt(Menu::getSort));
+
+        //  为子菜单设置子菜单
+        for (Menu nav : childList) {
+            nav.setChildren(getChild(nav.getId(), allList));
+        }
+
+        if (childList.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return childList;
+    }
+
     @Override
-    public Result modifyMenu(int menuId, String name, String url, int parentId, String icon) {
-        if(this.menuMapper.modifyMenuByMenuId(menuId, name, url, parentId, icon)) {
+    public Result modifyMenu(int menuId, String name, String url, int parentId, String icon, int sort) {
+        if(this.menuMapper.modifyMenuByMenuId(menuId, name, url, parentId, icon, sort)) {
             return new Result(ResultCode.SUCCESS, "修改成功");
         }
         return new Result(ResultCode.OPERATIONFAIL, null);
@@ -97,26 +125,5 @@ public class MenuServiceImpl implements MenuService {
         return new Result(ResultCode.SUCCESS, "删除成功");
     }
 
-
-    public static List<Menu> getChild(Integer id, List<Menu> allList) {
-        //  子菜单
-        List<Menu> childList = new ArrayList<>();
-        for (Menu menu : allList) {
-            if (menu.getParentId() == id) {
-                childList.add(menu);
-            }
-        }
-
-        //  为子菜单设置子菜单
-        for (Menu nav : childList) {
-            nav.setChildren(getChild(nav.getId(), allList));
-        }
-
-        if (childList.isEmpty()) {
-            return new ArrayList<>();
-        }
-
-        return childList;
-    }
 
 }

@@ -22,9 +22,10 @@ public interface MenuService {
      * @param url 菜单URL
      * @param parentId 上级菜单ID
      * @param icon 图标
+     * @param sort 排序
      * @return 是否成功
      */
-    Result modifyMenu(int menuId, String name, String url, int parentId, String icon);
+    Result modifyMenu(int menuId, String name, String url, int parentId, String icon, int sort);
 
     /**
      * 新增菜单

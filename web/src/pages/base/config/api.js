@@ -45,6 +45,9 @@ let api = {
 
     findAllDictionary: `${host}/dictionary/findAllDictionary`, // 查询全部数据字典
     findDictionaryItemByCode: `${host}/dictionary/findDictionaryItemByCode`, // 通过编码查询数据字典项
+    addDictionary: `${host}/dictionary/addDictionary`, // 新增字典
+    deleteDictionary: `${host}/dictionary/deleteDictionary`, // 删除字典
+    editDictionary: `${host}/dictionary/editDictionary`, // 编辑字典
 }
 
 export default api;

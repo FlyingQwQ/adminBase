@@ -44,7 +44,9 @@ export default {
         },
         handleSelect(index, indexPath, vnode) {
             let attr = vnode.$attrs.item;
-            tabsTool.openTab({ url: attr.url, name: attr.name, id: attr.id });
+            let breadcrumb = [...indexPath];
+            breadcrumb[breadcrumb.length - 1] = attr.name;
+            tabsTool.openTab({ url: attr.url, name: attr.name, id: attr.id, breadcrumb });
         }
     }
 }

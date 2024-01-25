@@ -145,8 +145,12 @@ export default {
             {
                 label: '菜单图标',
                 key: 'icon',
-                type: 'slot',
-                span: 8
+                type: 'slot'
+            },
+            {
+                label: '排序',
+                key: 'sort',
+                type: 'number',
             }
         ],
         resourceButtonList: [],
@@ -199,13 +203,10 @@ export default {
         });
     },
     handleNodeClick(data, node, nodeBody) {
-        let { id, name, url, parentId, icon } = data;
+        let { id, parentId } = data;
         this.currSelectMenu = Object.assign(this.currSelectMenu, data);
 
-        this.$refs.ParamForm.setFormValue('name', name);
-        this.$refs.ParamForm.setFormValue('url', url);
-        this.$refs.ParamForm.setFormValue('parentId', parentId);
-        this.$refs.ParamForm.setFormValue('icon', icon);
+        this.$refs.ParamForm.setFormValues(data);
         this.$refs.treeSelect.setValue(parentId);
 
         this.loadResourceButtonList(id);
