@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { fetch } from '../config';
 
 export default {
     data() {
@@ -137,11 +138,16 @@ export default {
     },
     methods: {
         init() {
+            this.dictionaryId = this.$route.query.userId;
             this.$refs.table.loadData();
         },
 
         edit(row) {
             this.editDialog = true;
+
+            this.$nextTick().then(() => {
+                this.$refs.editParamForm.setFormValues(row);
+            });
         },
         delete(row) {
             this.$confirm('此操作将永久删除该字典, 是否继续?', '提示', {
@@ -149,7 +155,17 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                
+                fetch.deleteDictionaryItem({
+                    id: row.id
+                }).then((res) => {
+                    if(res.code == 1) {
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        this.init();
+                    }
+                });
             }).catch(() => {});
         },
 
@@ -164,13 +180,40 @@ export default {
         addButtonOk() {
             this.$refs.addParamForm.validate().then((valid) => {
                 this.addLoading = true;
-                
+                fetch.addDictionaryItem({
+                    ...this.$refs.addParamForm.getFormValue(),
+                    dictionaryCode: this.$route.query.code
+                }).then((res) => {
+                    if(res.code == 1) {
+                        this.$message({
+                            type: 'success',
+                            message: '添加成功!'
+                        });
+                        this.init();
+                    }
+                }).finally(() => {
+                    this.addLoading = false;
+                    this.addDialog = false;
+                });
             }).catch((error) => {});
         },
         editButtonOk() {
             this.$refs.editParamForm.validate().then((valid) => {
                 this.editLoading = true;
-                
+                fetch.editDictionaryItem({
+                    ...this.$refs.editParamForm.getFormValue()
+                }).then((res) => {
+                    if(res.code == 1) {
+                        this.$message({
+                            type: 'success',
+                            message: '修改成功!'
+                        });
+                        this.init();
+                    }
+                }).finally(() => {
+                    this.editLoading = false;
+                    this.editDialog = false;
+                });
             }).catch((error) => {});
         }
     }

@@ -29,6 +29,7 @@
 
 <script>
 import { fetch } from '@/config'
+import CryptoJS from 'crypto-js'
 
 export default {
     data() {
@@ -52,7 +53,7 @@ export default {
                 if (valid) {
                     fetch.login({
                         username: this.loginForm.name,
-                        password: this.loginForm.password
+                        password: CryptoJS.MD5(this.loginForm.password)
                     }).then((res) => {
                         if(res.code == 1) {
                             localStorage.setItem('userInfo', JSON.stringify(res.data));

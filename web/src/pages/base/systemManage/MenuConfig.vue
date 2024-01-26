@@ -244,6 +244,7 @@ export default {
                         type: 'success',
                         message: '保存成功!'
                     });
+                    this.$bus.$emit('reloadMenu');
                 }
             });
         }).catch((error) => {});

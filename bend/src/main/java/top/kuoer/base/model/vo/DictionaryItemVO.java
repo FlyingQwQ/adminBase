@@ -1,11 +1,11 @@
-package top.kuoer.base.model.entity;
+package top.kuoer.base.model.vo;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
-public class DictionaryItemEntity {
+public class DictionaryItemVO {
 
     private int id;
     private String key;

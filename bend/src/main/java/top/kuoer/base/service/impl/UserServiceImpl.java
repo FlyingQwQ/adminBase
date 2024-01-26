@@ -1,5 +1,6 @@
 package top.kuoer.base.service.impl;
 
+import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
         if(null != userInfo) {
             return new Result(ResultCode.OPERATIONFAIL, "当前注册的用户名已经存在了");
         }
-        if(this.userMapper.insertUser(userName, password)) {
+        if(this.userMapper.insertUser(userName, SaSecureUtil.md5(password))) {
             return new Result(ResultCode.SUCCESS, "用户创建成功");
         }
         return new Result(ResultCode.SUCCESS, "创建失败");
@@ -103,7 +104,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Result editUser(UserRequest userRequest) {
-
+        userRequest.setPassword(SaSecureUtil.md5(userRequest.getPassword()));
         this.userMapper.editUser(userRequest);
         this.authorizeMapper.deleteUserRole(userRequest.getId());
         for(Integer roleId : userRequest.getRoles()) {

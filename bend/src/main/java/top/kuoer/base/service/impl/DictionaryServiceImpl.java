@@ -9,6 +9,7 @@ import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
 import top.kuoer.base.model.entity.DictionaryEntity;
 import top.kuoer.base.model.entity.DictionaryItemEntity;
+import top.kuoer.base.model.vo.DictionaryItemVO;
 import top.kuoer.base.model.vo.DictionaryVO;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.mapper.DictionaryMapper;
@@ -59,6 +60,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public Result deleteDictionary(int id) {
         if(this.dictionaryMapper.deleteDictionary(id)) {
+            this.dictionaryMapper.deleteAllDictionaryItemByDictionaryId(id);
             return new Result(ResultCode.SUCCESS, "删除成功");
         }
         return new Result(ResultCode.OPERATIONFAIL, "删除失败");
@@ -69,9 +71,37 @@ public class DictionaryServiceImpl implements DictionaryService {
         DictionaryEntity dictionaryEntity = new DictionaryEntity();
         BeanUtils.copyProperties(dictionary, dictionaryEntity);
         if(this.dictionaryMapper.editDictionary(dictionaryEntity)) {
+            return new Result(ResultCode.SUCCESS, "修改成功");
+        }
+        return new Result(ResultCode.OPERATIONFAIL, "修改失败");
+    }
+
+    @Override
+    public Result deleteDictionaryItem(int id) {
+        if(this.dictionaryMapper.deleteDictionaryItem(id)) {
             return new Result(ResultCode.SUCCESS, "删除成功");
         }
         return new Result(ResultCode.OPERATIONFAIL, "删除失败");
+    }
+
+    @Override
+    public Result editDictionaryItem(DictionaryItemVO dictionaryItem) {
+        DictionaryItemEntity dictionaryItemEntity = new DictionaryItemEntity();
+        BeanUtils.copyProperties(dictionaryItem, dictionaryItemEntity);
+        if(this.dictionaryMapper.editDictionaryItem(dictionaryItemEntity)) {
+            return new Result(ResultCode.SUCCESS, "修改成功");
+        }
+        return new Result(ResultCode.OPERATIONFAIL, "修改失败");
+    }
+
+    @Override
+    public Result addDictionaryItem(DictionaryItemVO dictionaryItem) {
+        DictionaryItemEntity dictionaryItemEntity = new DictionaryItemEntity();
+        BeanUtils.copyProperties(dictionaryItem, dictionaryItemEntity);
+        if(this.dictionaryMapper.addDictionaryItemByCode(dictionaryItemEntity)) {
+            return new Result(ResultCode.SUCCESS, "添加成功");
+        }
+        return new Result(ResultCode.OPERATIONFAIL, "添加失败");
     }
 
 }

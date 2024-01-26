@@ -26,6 +26,9 @@ export default {
     },
     mounted() {
         this.loadMenu();
+        this.$bus.$on('reloadMenu', () => {
+            this.loadMenu();
+        });
     },
     methods: {
         loadMenu() {

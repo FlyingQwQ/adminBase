@@ -1,6 +1,7 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
+import top.kuoer.base.model.vo.DictionaryItemVO;
 import top.kuoer.base.model.vo.DictionaryVO;
 import top.kuoer.base.model.vo.PaginationRequest;
 
@@ -41,5 +42,27 @@ public interface DictionaryService {
      * @return 是否成功
      */
     Result editDictionary(DictionaryVO dictionary);
+
+
+    /**
+     * 删除字典项
+     * @param id 字典项ID
+     * @return 是否成功
+     */
+    Result deleteDictionaryItem(int id);
+
+    /**
+     * 编辑字典项
+     * @param dictionaryItem 字典项信息
+     * @return 是否成功
+     */
+    Result editDictionaryItem(DictionaryItemVO dictionaryItem);
+
+    /**
+     * 添加字典项
+     * @param dictionaryItem 字典项信息
+     * @return 是否成功
+     */
+    Result addDictionaryItem(DictionaryItemVO dictionaryItem);
 
 }

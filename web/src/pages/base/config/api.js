@@ -48,6 +48,9 @@ let api = {
     addDictionary: `${host}/dictionary/addDictionary`, // 新增字典
     deleteDictionary: `${host}/dictionary/deleteDictionary`, // 删除字典
     editDictionary: `${host}/dictionary/editDictionary`, // 编辑字典
+    deleteDictionaryItem: `${host}/dictionary/deleteDictionaryItem`, // 删除字典项
+    editDictionaryItem: `${host}/dictionary/editDictionaryItem`, // 编辑字典项
+    addDictionaryItem: `${host}/dictionary/addDictionaryItem`, // 新增字典项
 }
 
 export default api;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.kuoer.base.common.Result;
+import top.kuoer.base.model.vo.DictionaryItemVO;
 import top.kuoer.base.model.vo.DictionaryVO;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.service.DictionaryService;
@@ -53,4 +54,22 @@ public class DictionaryController {
         return this.dictionaryService.editDictionary(dictionary);
     }
 
+
+    @RequestMapping(path = "/deleteDictionaryItem")
+    @SaCheckPermission("authorize.deleteDictionaryItem")
+    public Result deleteDictionaryItem(@RequestParam int id) {
+        return this.dictionaryService.deleteDictionaryItem(id);
+    }
+
+    @RequestMapping(path = "/editDictionaryItem")
+    @SaCheckPermission("authorize.editDictionaryItem")
+    public Result editDictionaryItem(DictionaryItemVO dictionaryItem) {
+        return this.dictionaryService.editDictionaryItem(dictionaryItem);
+    }
+
+    @RequestMapping(path = "/addDictionaryItem")
+    @SaCheckPermission("authorize.addDictionaryItem")
+    public Result addDictionaryItem(DictionaryItemVO dictionaryItem) {
+        return this.dictionaryService.addDictionaryItem(dictionaryItem);
+    }
 }
