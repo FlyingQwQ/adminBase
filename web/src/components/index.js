@@ -8,6 +8,7 @@ import ParamForm from './ParamForm.vue'
 import DictionarySelect from './DictionarySelect.vue'
 import TreeSelect from './TreeSelect.vue'
 import IconPicker from './IconPicker.vue'
+import FileUpload from './upload/FileUpload.vue'
 
 Vue.component('Menu', Menu)
 Vue.component('MenuItem', MenuItem)
@@ -17,3 +18,4 @@ Vue.component('ParamForm', ParamForm)
 Vue.component('DictionarySelect', DictionarySelect)
 Vue.component('TreeSelect', TreeSelect)
 Vue.component('IconPicker', IconPicker)
+Vue.component('FileUpload', FileUpload)

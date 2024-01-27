@@ -135,6 +135,7 @@ export default {
             }, true).then((res) => {
                 if(res.code == 1) {
                     this.$message.success('保存成功');
+                    this.$bus.$emit('reloadMenu');
                 }
             });
         }

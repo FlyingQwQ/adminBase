@@ -1,5 +1,8 @@
 <template>
   <div>
+    <p>文件上次测试</p>
+    <FileUpload></FileUpload>
+    <hr>
     <p>表单测试</p>
     <ParamForm :params="params"></ParamForm>
     <hr>
