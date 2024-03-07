@@ -2,6 +2,7 @@ package top.kuoer.base.service;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import top.kuoer.base.common.Result;
+import top.kuoer.base.model.vo.ChangePasswordRequest;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.vo.UserRequest;
 
@@ -55,5 +56,11 @@ public interface UserService {
      */
     Result editUser(UserRequest userRequest);
 
+    /**
+     * 用户修改账号密码
+     * @param changePasswordRequest 修改密码
+     * @return 是否成功
+     */
+    Result changePassword(ChangePasswordRequest changePasswordRequest);
 
 }

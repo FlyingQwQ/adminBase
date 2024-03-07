@@ -29,6 +29,7 @@
               </template>
               <el-tag v-else type="warning">没有分配任何角色</el-tag>
             </div>
+            <el-button type="text" @click="changePassword">修改密码</el-button>
             <el-button type="text" @click="logout">退出登录</el-button>
           </div>
           <span class="welcome" slot="reference">欢迎您，{{ $store.state.user.userInfo.userName }}</span>
@@ -89,6 +90,12 @@ export default {
           this.$router.push({ path: '/login' });
           this.$store.commit('CLEAR_USER_INFO');
         }
+      });
+    },
+    changePassword() {
+      tabsTool.openTab({ 
+        name: `修改密码`, 
+        url: `/main/changePassword` 
       });
     },
 

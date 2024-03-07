@@ -10,6 +10,7 @@ let api = {
     deleteUser: `${host}/user/deleteUser`, // 删除账号
     getUserInfoById: `${host}/user/getUserInfo`, // 查询用户信息
     editUser: `${host}/user/editUser`, // 编辑用户
+    changePassword: `${host}/user/changePassword`, // 用户修改密码
     
     findRoles: `${host}/authorize/findRoles`, // 获取指定用户的角色列表
     findAllRoles: `${host}/authorize/findAllRoles`, // 获取所有角色列表

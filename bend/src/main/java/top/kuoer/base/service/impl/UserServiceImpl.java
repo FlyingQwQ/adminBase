@@ -4,10 +4,13 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.kuoer.base.mapper.AuthorizeMapper;
+import top.kuoer.base.model.entity.ChangePasswordEntity;
+import top.kuoer.base.model.vo.ChangePasswordRequest;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.entity.UserInfo;
 import top.kuoer.base.mapper.UserMapper;
@@ -112,6 +115,25 @@ public class UserServiceImpl implements UserService {
         }
 
         return new Result(ResultCode.SUCCESS, "修改成功");
+    }
+
+    @Override
+    public Result changePassword(ChangePasswordRequest changePasswordRequest) {
+        int userId = Integer.parseInt((String) StpUtil.getLoginId());
+
+        ChangePasswordEntity changePassword = new ChangePasswordEntity();
+        BeanUtils.copyProperties(changePasswordRequest, changePassword);
+        changePassword.setId(userId);
+
+        if(changePassword.getPassword().equals(changePassword.getConfirmPassword())) {
+            changePassword.setPassword(SaSecureUtil.md5(changePassword.getPassword()));
+            if(this.userMapper.changePassword(changePassword)) {
+                return new Result(ResultCode.SUCCESS, "修改成功");
+            }
+            return new Result(ResultCode.OPERATIONFAIL, null);
+        } else {
+            return new Result(ResultCode.OPERATIONFAIL, "两次输入的密码不一致！");
+        }
     }
 
 

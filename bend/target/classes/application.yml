@@ -8,10 +8,15 @@ spring:
   jackson:
     default-property-inclusion: non_null
 
+
 mybatis:
   type-aliases-package:
     - top.kuoer.base.model.entity
   mapper-locations: classpath:mapper/*.xml
+
+file:
+  upload:
+    url: '/Users/lining/项目/base/adminBase/bend/files'
 
 sa-token:
   # token 名称（同时也是 cookie 名称）

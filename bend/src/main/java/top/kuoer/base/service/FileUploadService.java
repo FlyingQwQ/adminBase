@@ -3,6 +3,8 @@ package top.kuoer.base.service;
 import org.springframework.web.multipart.MultipartFile;
 import top.kuoer.base.common.Result;
 
+import java.io.IOException;
+
 public interface FileUploadService {
 
     /**
@@ -10,6 +12,6 @@ public interface FileUploadService {
      * @param files 文件列表
      * @return 文件信息
      */
-    Result upload(MultipartFile files[]);
+    Result upload(MultipartFile files[]) throws IOException;
 
 }

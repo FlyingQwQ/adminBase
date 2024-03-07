@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.service.FileUploadService;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(path = "/fileUpload", method = {RequestMethod.POST})
 public class FileUploadController {
@@ -21,7 +23,7 @@ public class FileUploadController {
     }
 
     @RequestMapping("/upload")
-    public Result upload(@RequestParam("file") MultipartFile files[]) {
+    public Result upload(@RequestParam("file") MultipartFile files[]) throws IOException {
         return this.fileUploadService.upload(files);
     }
 

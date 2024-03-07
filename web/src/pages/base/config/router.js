@@ -1,5 +1,9 @@
 
 let router = [
+    {
+        path: 'changePassword',
+        component: () => import('@/pages/base/main/ChangePassword.vue')
+    },
     // ===============用户管理===============
     {
         path: 'accountManage',

@@ -3,6 +3,7 @@ package top.kuoer.base.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.kuoer.base.model.vo.ChangePasswordRequest;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.vo.UserRequest;
 import top.kuoer.base.service.UserService;
@@ -61,5 +62,10 @@ public class UserController {
         return this.userService.editUser(userRequest);
     }
 
+    @RequestMapping(path = "/changePassword")
+    @SaCheckPermission("user.changePassword")
+    public Result changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+        return this.userService.changePassword(changePasswordRequest);
+    }
 
 }
