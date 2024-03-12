@@ -11,7 +11,7 @@ export default {
     },
     data() {
         return {
-            abc: '2333'
+            
         }
     },
     render(h) {

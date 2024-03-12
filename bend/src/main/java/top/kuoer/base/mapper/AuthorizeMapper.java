@@ -58,8 +58,8 @@ public interface AuthorizeMapper {
     @Delete("delete from role_permissions where roleid=#{roleId}")
     boolean deleteRolePermissionsByRoleId(@Param("roleId") int roleId);
 
-    @Delete("delete from user_roles where userid=#{roleId}")
-    boolean deleteUserRole(int userId);
+    @Delete("delete from user_roles where userid=#{userId}")
+    boolean deleteUserRole(@Param("userId") int userId);
 
     // --------修改-------------------
 

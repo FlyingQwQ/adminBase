@@ -3,6 +3,10 @@ import { platform } from "@/config/platform"
 let host = platform.host;
 
 let api = {
+    uploadFile: `${host}/fileUpload/upload`, // 上传文件
+    removeFile: `${host}/fileUpload/remove`, // 根据文件tmp文件名删除文件
+    findFileListByFlag: `${host}/fileUpload/findFileListByFlag`, // 通过Flag查询该用户的文件列表
+
     login: `${host}/user/login`, // 登录
     register: `${host}/user/register`, // 注册账号
     logout: `${host}/user/logout`, // 注销登录

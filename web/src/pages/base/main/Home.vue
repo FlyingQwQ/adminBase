@@ -6,8 +6,9 @@
     </quill-editor>
     <p>{{ content }}</p>
 
-    <p>文件上次测试</p>
-    <FileUpload></FileUpload>
+    <p>文件上传测试</p>
+    <FileUpload tips="上传文件大小不能超过 10MB!" :limit="1" :public="false"></FileUpload>
+    <!-- <SmallFileUpload></SmallFileUpload> -->
     <hr>
     <p>表单测试</p>
     <ParamForm :params="params"></ParamForm>

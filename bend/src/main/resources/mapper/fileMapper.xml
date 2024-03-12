@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.kuoer.base.mapper.FileMapper">
+
+
+    <insert id="saveFiles" parameterType="java.util.List">
+        insert into files (file_name, tmp_name, user_id, create_time, flag)
+        VALUES
+        <foreach collection="fileEntityList" item="item" index="index" separator=",">
+            (#{item.fileName}, #{item.tmpName}, #{item.userId}, #{item.createTime}, '${item.flag}')
+        </foreach>
+    </insert>
+
+
+</mapper>

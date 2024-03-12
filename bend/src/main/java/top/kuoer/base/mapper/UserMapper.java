@@ -15,6 +15,9 @@ public interface UserMapper {
     @Select("SELECT id FROM user WHERE username=#{name} and password=#{password}")
     Integer findIdByUnameAndPwd(@Param("name") String username, @Param("password") String password);
 
+    @Select("SELECT * FROM user WHERE id=#{id}")
+    UserInfo findUserInfoById(@Param("id") int userId);
+
     @Select("SELECT * FROM user WHERE username=#{name}")
     UserInfo findUserInfoByName(@Param("name") String username);
 

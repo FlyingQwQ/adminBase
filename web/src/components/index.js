@@ -9,6 +9,7 @@ import DictionarySelect from './DictionarySelect.vue'
 import TreeSelect from './TreeSelect.vue'
 import IconPicker from './IconPicker.vue'
 import FileUpload from './upload/FileUpload.vue'
+import SmallFileUpload from './upload/SmallFileUpload.vue'
 
 Vue.component('Menu', Menu)
 Vue.component('MenuItem', MenuItem)
@@ -19,3 +20,4 @@ Vue.component('DictionarySelect', DictionarySelect)
 Vue.component('TreeSelect', TreeSelect)
 Vue.component('IconPicker', IconPicker)
 Vue.component('FileUpload', FileUpload)
+Vue.component('SmallFileUpload', SmallFileUpload)

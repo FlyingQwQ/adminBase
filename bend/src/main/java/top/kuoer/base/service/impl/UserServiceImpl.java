@@ -107,13 +107,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Result editUser(UserRequest userRequest) {
-        userRequest.setPassword(SaSecureUtil.md5(userRequest.getPassword()));
+        if(null != userRequest.getPassword()) {
+            userRequest.setPassword(SaSecureUtil.md5(userRequest.getPassword()));
+        }
         this.userMapper.editUser(userRequest);
         this.authorizeMapper.deleteUserRole(userRequest.getId());
         for(Integer roleId : userRequest.getRoles()) {
             this.authorizeMapper.addRoleToUser(roleId, userRequest.getId());
         }
-
         return new Result(ResultCode.SUCCESS, "修改成功");
     }
 
