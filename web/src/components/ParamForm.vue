@@ -105,8 +105,16 @@ export default {
   
 <style lang="less" scoped>
 .simpleForm {
-    margin-top: 10px;
+    margin: 20px 0 20px 0;
     padding: 0 10px;
     box-sizing: border-box;
+}
+
+.el-form-item {
+    margin-bottom: 0px;
+}
+
+.el-col {
+    margin: 10px 0 10px 0;
 }
 </style>
