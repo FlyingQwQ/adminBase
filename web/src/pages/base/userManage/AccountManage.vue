@@ -1,7 +1,8 @@
 <template>
     <div>
         <ResourceButton :config="resourceButtonConfig"></ResourceButton>
-        <SimpleTable ref="table" :columns="columns" findApi="getAllUserInfo"></SimpleTable>
+        <ParamForm ref="ParamForm" :params="params"></ParamForm>
+        <SimpleTable ref="table" :columns="columns" findApi="getAllUserInfo" :params="filterParams"></SimpleTable>
 
         <el-dialog title="注册新账号" :visible.sync="addDialog">
             <ParamForm 
@@ -50,8 +51,18 @@ export default {
             resourceButtonConfig: {
                 add: {
                     click: this.add
+                },
+                search: {
+                    click: this.search
                 }
             },
+            params: [
+                {
+                    label: '用户名',
+                    key: 'username',
+                    type: 'text'
+                }
+            ],
             columns: [
                 {
                     label: '序号',
@@ -91,6 +102,7 @@ export default {
                     }
                 }
             ],
+            filterParams: {},
 
             addDialog: false,
             addLoading: false,
@@ -107,6 +119,12 @@ export default {
 
         add() {
             this.addDialog = true;
+        },
+        search() {
+            this.filterParams = this.$refs.ParamForm.getFormValue();
+            this.$nextTick(() => {
+                this.init();
+            });
         },
         modify(row) {
             tabsTool.openTab({ 

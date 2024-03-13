@@ -4,11 +4,9 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.kuoer.base.common.Result;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.*;
 import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.model.entity.Role;
-import top.kuoer.base.model.vo.RoleMenu;
-import top.kuoer.base.model.vo.RolePermissionRequest;
 import top.kuoer.base.service.AuthorizeService;
 
 @RestController
@@ -30,8 +28,8 @@ public class AuthorizeController {
 
     @RequestMapping(path = "/findAllRoles")
     @SaCheckPermission("authorize.findAllRoles")
-    public Result findAllRoles(PaginationRequest paginationRequest) {
-        return this.authorizeService.findAllRoles(paginationRequest);
+    public Result findAllRoles(PaginationRequest paginationRequest, RoleRequest roleRequest) {
+        return this.authorizeService.findAllRoles(paginationRequest, roleRequest);
     }
 
     @RequestMapping(path = "/findPermissions")
@@ -49,8 +47,8 @@ public class AuthorizeController {
 
     @RequestMapping(path = "/findAllPermissions")
     @SaCheckPermission("authorize.findAllPermissions")
-    public Result findAllPermissions(PaginationRequest paginationRequest) {
-        return this.authorizeService.findAllPermissions(paginationRequest);
+    public Result findAllPermissions(PaginationRequest paginationRequest, PermissionRequest permissionRequest) {
+        return this.authorizeService.findAllPermissions(paginationRequest, permissionRequest);
     }
 
 

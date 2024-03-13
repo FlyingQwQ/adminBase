@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
+import top.kuoer.base.mapper.RolesMapper;
 import top.kuoer.base.model.entity.Menu;
 import top.kuoer.base.model.entity.Role;
 import top.kuoer.base.model.entity.RoleMenuQuery;
@@ -22,19 +23,21 @@ public class MenuServiceImpl implements MenuService {
     private final MenuMapper menuMapper;
     private final ResourceButtonMapper resourceButtonMapper;
     private final AuthorizeMapper authorizeMapper;
+    private final RolesMapper rolesMapper;
 
     @Autowired
-    public MenuServiceImpl(MenuMapper menuMapper, ResourceButtonMapper resourceButtonMapper, AuthorizeMapper authorizeMapper) {
+    public MenuServiceImpl(MenuMapper menuMapper, ResourceButtonMapper resourceButtonMapper, AuthorizeMapper authorizeMapper, RolesMapper rolesMapper) {
         this.menuMapper = menuMapper;
         this.resourceButtonMapper = resourceButtonMapper;
         this.authorizeMapper = authorizeMapper;
+        this.rolesMapper = rolesMapper;
     }
 
 
     @Override
     public Result getUserMenus() {
         int userId = Integer.parseInt((String) StpUtil.getLoginId());
-        List<Role> roles = this.authorizeMapper.findRolesByUserId(userId);
+        List<Role> roles = this.rolesMapper.findRolesByUserId(userId);
 
         List<Menu> allMenuList = this.menuMapper.getAllMenu();
         Set<Menu> roleMenuSet = new HashSet<>();

@@ -2,8 +2,9 @@
 <template>
     <div>
         <ResourceButton :config="resourceButtonConfig"></ResourceButton>
-        <SimpleTable ref="table" :columns="columns" findApi="findAllRoles"></SimpleTable>
-
+        <ParamForm ref="ParamForm" :params="params"></ParamForm>
+        <SimpleTable ref="table" :columns="columns" findApi="findAllRoles" :params="filterParams"></SimpleTable>
+        
         <el-dialog title="新建角色" :visible.sync="addDialog">
             <ParamForm 
                 ref="addParamForm" 
@@ -71,8 +72,23 @@ export default {
             resourceButtonConfig: {
                 add: {
                     click: this.add
+                },
+                search: {
+                    click: this.search
                 }
             },
+            params: [
+                {
+                    label: '角色名',
+                    key: 'roleName',
+                    type: 'text'
+                },
+                {
+                    label: '描述',
+                    key: 'describe',
+                    type: 'text'
+                },
+            ],
             columns: [
                 {
                     label: 'ID',
@@ -116,6 +132,7 @@ export default {
                     }
                 }
             ],
+            filterParams: {},
 
             addDialog: false,
             addLoading: false,
@@ -134,6 +151,12 @@ export default {
         },
         add() {
             this.addDialog = true;
+        },
+        search() {
+            this.filterParams = this.$refs.ParamForm.getFormValue();
+            this.$nextTick(() => {
+                this.init();
+            });
         },
         modify(row) {
             this.editDialog = true;

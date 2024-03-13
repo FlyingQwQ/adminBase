@@ -40,8 +40,8 @@ public class UserController {
 
     @RequestMapping(path = "/getAllUserInfo")
     @SaCheckPermission("user.getAllUserInfo")
-    public Result getAllUserInfo(PaginationRequest paginationRequest) {
-        return this.userService.getAllUserInfo(paginationRequest);
+    public Result getAllUserInfo(PaginationRequest paginationRequest, UserRequest userRequest) {
+        return this.userService.getAllUserInfo(paginationRequest, userRequest);
     }
 
     @RequestMapping(path = "/getUserInfo")

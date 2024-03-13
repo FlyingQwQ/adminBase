@@ -2,6 +2,7 @@ package top.kuoer.base.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +21,7 @@ import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
 import top.kuoer.base.model.vo.LoginResult;
 import top.kuoer.base.utils.AuthorizeTools;
+import top.kuoer.base.utils.QueryWrapperUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -81,9 +83,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result getAllUserInfo(PaginationRequest paginationRequest) {
+    public Result getAllUserInfo(PaginationRequest paginationRequest, UserRequest userRequest) {
         PageHelper.startPage(paginationRequest.getPageNum(), paginationRequest.getPageSize());
-        return new Result(ResultCode.SUCCESS, PageInfo.of(this.userMapper.getAllUserInfo()));
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(userRequest, userInfo);
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        QueryWrapperUtils.autoLikeIfNotNull(queryWrapper, userInfo);
+        return new Result(ResultCode.SUCCESS, PageInfo.of(this.userMapper.selectList(queryWrapper)));
     }
 
     @Override

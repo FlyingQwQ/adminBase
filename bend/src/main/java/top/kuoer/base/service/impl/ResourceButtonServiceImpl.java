@@ -9,6 +9,7 @@ import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
 import top.kuoer.base.mapper.AuthorizeMapper;
 import top.kuoer.base.mapper.ResourceButtonMapper;
+import top.kuoer.base.mapper.RolesMapper;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.entity.ResourceButtonEntity;
 import top.kuoer.base.model.entity.Role;
@@ -25,11 +26,13 @@ public class ResourceButtonServiceImpl implements ResourceButtonService {
 
     private final ResourceButtonMapper resourceButtonMapper;
     private final AuthorizeMapper authorizeMapper;
+    private final RolesMapper rolesMapper;
 
     @Autowired
-    public ResourceButtonServiceImpl(ResourceButtonMapper resourceButtonMapper, AuthorizeMapper authorizeMapper) {
+    public ResourceButtonServiceImpl(ResourceButtonMapper resourceButtonMapper, AuthorizeMapper authorizeMapper, RolesMapper rolesMapper) {
         this.resourceButtonMapper = resourceButtonMapper;
         this.authorizeMapper = authorizeMapper;
+        this.rolesMapper = rolesMapper;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class ResourceButtonServiceImpl implements ResourceButtonService {
     @Override
     public Result findUserResourceButtonByMenuId(int menuId) {
         int userId = Integer.parseInt((String) StpUtil.getLoginId());
-        List<Role> roles = this.authorizeMapper.findRolesByUserId(userId);
+        List<Role> roles = this.rolesMapper.findRolesByUserId(userId);
 
         List<ResourceButtonEntity> resourceButtonList = this.resourceButtonMapper.findResourceButtonByMenuId(menuId);
         Set<ResourceButtonEntity> roleResourceButtonSet = new HashSet<>();

@@ -1,11 +1,9 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.*;
 import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.model.entity.Role;
-import top.kuoer.base.model.vo.RoleMenu;
-import top.kuoer.base.model.vo.RolePermissionRequest;
 
 public interface AuthorizeService {
 
@@ -20,7 +18,7 @@ public interface AuthorizeService {
      * 查询全部角色
      * @return 角色列表
      */
-    Result findAllRoles(PaginationRequest paginationRequest);
+    Result findAllRoles(PaginationRequest paginationRequest, RoleRequest roleRequest);
 
     /**
      * 根据用户id查询权限
@@ -40,7 +38,7 @@ public interface AuthorizeService {
      * 查询全部权限
      * @return 权限列表
      */
-    Result findAllPermissions(PaginationRequest paginationRequest);
+    Result findAllPermissions(PaginationRequest paginationRequest, PermissionRequest permissionRequest);
 
     /**
      * 添加新的角色

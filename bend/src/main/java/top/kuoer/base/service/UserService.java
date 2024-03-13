@@ -33,7 +33,7 @@ public interface UserService {
      * 获取全部用户信息
      * @return 用户列表
      */
-    Result getAllUserInfo(PaginationRequest paginationRequest);
+    Result getAllUserInfo(PaginationRequest paginationRequest, UserRequest userRequest);
 
     /**
      * 获取用户信息

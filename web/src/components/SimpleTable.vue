@@ -72,6 +72,7 @@ export default {
     },
     methods: {
         loadData() {
+            this.tableData = [];
             fetch[this.findApi]({
                 pageNum: this.currentPage,
                 pageSize: this.pageSize,

@@ -2,8 +2,8 @@
 <template>
     <div>
         <ResourceButton :config="resourceButtonConfig"></ResourceButton>
-        <SimpleTable ref="table" :columns="columns" findApi="findAllPermissions"></SimpleTable>
-
+        <ParamForm ref="ParamForm" :params="params"></ParamForm>
+        <SimpleTable ref="table" :columns="columns" findApi="findAllPermissions" :params="filterParams"></SimpleTable>
         <el-dialog title="新建权限" :visible.sync="addDialog">
             <ParamForm 
                 ref="addParamForm" 
@@ -77,6 +77,18 @@ export default {
                     click: this.search
                 }
             },
+            params: [
+                {
+                    label: '权限名',
+                    key: 'permissionName',
+                    type: 'text'
+                },
+                {
+                    label: '描述',
+                    key: 'describe',
+                    type: 'text'
+                },
+            ],
             columns: [
                 {
                     label: 'ID',
@@ -120,6 +132,7 @@ export default {
                     }
                 }
             ],
+            filterParams: {},
 
             addDialog: false,
             addLoading: false,
@@ -170,7 +183,10 @@ export default {
             this.addDialog = true;
         },
         search() {
-            this.init();
+            this.filterParams = this.$refs.ParamForm.getFormValue();
+            this.$nextTick(() => {
+                this.init();
+            });
         },
 
         cancelDialog() {
