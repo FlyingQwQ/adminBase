@@ -2,6 +2,7 @@ package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
 import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.ResourceButtonRequest;
 
 public interface ResourceButtonService {
 
@@ -9,7 +10,7 @@ public interface ResourceButtonService {
      * 查询全部资源按钮
      * @return 资源按钮列表
      */
-    Result findAllResourceButton(PaginationRequest paginationRequest);
+    Result findAllResourceButton(PaginationRequest paginationRequest, ResourceButtonRequest resourceButtonRequest);
 
     /**
      * 获取当前用户角色的资源按钮

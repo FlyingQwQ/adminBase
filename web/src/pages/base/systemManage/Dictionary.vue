@@ -1,7 +1,8 @@
 <template>
     <div>
         <ResourceButton :config="resourceButtonConfig"></ResourceButton>
-        <SimpleTable ref="table" :columns="columns" findApi="findAllDictionary"></SimpleTable>
+        <ParamForm ref="ParamForm" :params="params"></ParamForm>
+        <SimpleTable ref="table" :columns="columns" findApi="findAllDictionary" :params="filterParams"></SimpleTable>
 
         <el-dialog title="新建字典" :visible.sync="addDialog">
             <ParamForm 
@@ -86,7 +87,27 @@ export default {
                 add: {
                     click: this.add
                 },
+                search: {
+                    click: this.search
+                }
             },
+            params: [
+                {
+                    label: '字典名',
+                    key: 'name',
+                    type: 'text'
+                },
+                {
+                    label: '字典编码',
+                    key: 'code',
+                    type: 'text'
+                },
+                {
+                    label: '描述',
+                    key: 'describe',
+                    type: 'text'
+                },
+            ],
             columns: [
                 { label: 'ID', key: 'id' },
                 { label: '字典名', key: 'name' },
@@ -133,6 +154,7 @@ export default {
                     }
                 }
             ],
+            filterParams: {},
 
             addDialog: false,
             addLoading: false,
@@ -151,7 +173,13 @@ export default {
         add() {
             this.addDialog = true;
         },
-        
+        search() {
+            this.filterParams = this.$refs.ParamForm.getFormValue();
+            this.$nextTick(() => {
+                this.init();
+            });
+        },
+
         showList(row) {
             tabsTool.openTab({ 
                 name: `数据字典(详细) - ${row.name}`, 

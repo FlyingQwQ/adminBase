@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.ResourceButtonRequest;
 import top.kuoer.base.service.ResourceButtonService;
 
 @RestController
@@ -24,8 +25,8 @@ public class ResourceButtonController {
 
     @RequestMapping(path = "/findAllResourceButton")
     @SaCheckPermission("ResourceButton.findAllResourceButton")
-    public Result findAllResourceButton(PaginationRequest paginationRequest) {
-        return this.resourceButtonService.findAllResourceButton(paginationRequest);
+    public Result findAllResourceButton(PaginationRequest paginationRequest, ResourceButtonRequest resourceButtonRequest) {
+        return this.resourceButtonService.findAllResourceButton(paginationRequest, resourceButtonRequest);
     }
 
     @RequestMapping(path = "/findUserResourceButtonByMenuId")

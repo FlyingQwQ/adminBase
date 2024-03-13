@@ -1,8 +1,10 @@
 package top.kuoer.base.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.kuoer.base.common.Result;
@@ -10,11 +12,14 @@ import top.kuoer.base.common.ResultCode;
 import top.kuoer.base.mapper.AuthorizeMapper;
 import top.kuoer.base.mapper.ResourceButtonMapper;
 import top.kuoer.base.mapper.RolesMapper;
+import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.model.vo.PaginationRequest;
 import top.kuoer.base.model.entity.ResourceButtonEntity;
 import top.kuoer.base.model.entity.Role;
 import top.kuoer.base.model.entity.RoleMenuResourceButtonQuery;
+import top.kuoer.base.model.vo.ResourceButtonRequest;
 import top.kuoer.base.service.ResourceButtonService;
+import top.kuoer.base.utils.QueryWrapperUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,9 +41,13 @@ public class ResourceButtonServiceImpl implements ResourceButtonService {
     }
 
     @Override
-    public Result findAllResourceButton(PaginationRequest paginationRequest) {
+    public Result findAllResourceButton(PaginationRequest paginationRequest, ResourceButtonRequest resourceButtonRequest) {
         PageHelper.startPage(paginationRequest.getPageNum(), paginationRequest.getPageSize());
-        List<ResourceButtonEntity> ResourceButtonList = this.resourceButtonMapper.findAllResourceButton();
+        ResourceButtonEntity resourceButton = new ResourceButtonEntity();
+        BeanUtils.copyProperties(resourceButtonRequest, resourceButton);
+        QueryWrapper<ResourceButtonEntity> queryWrapper = new QueryWrapper<>();
+        QueryWrapperUtils.autoLikeIfNotNull(queryWrapper, resourceButton);
+        List<ResourceButtonEntity> ResourceButtonList = this.resourceButtonMapper.selectList(queryWrapper);
         if(!ResourceButtonList.isEmpty()) {
             return new Result(ResultCode.SUCCESS, PageInfo.of(ResourceButtonList));
         }

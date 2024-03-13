@@ -1,9 +1,7 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
-import top.kuoer.base.model.vo.DictionaryItemVO;
-import top.kuoer.base.model.vo.DictionaryVO;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.*;
 
 public interface DictionaryService {
 
@@ -12,7 +10,7 @@ public interface DictionaryService {
      * @param paginationRequest 分页查询
      * @return 字典列表
      */
-    Result findAllDictionary(PaginationRequest paginationRequest);
+    Result findAllDictionary(PaginationRequest paginationRequest, DictionaryRequest dictionaryRequest);
 
     /**
      * 通过编码查询数据字典项
@@ -20,7 +18,7 @@ public interface DictionaryService {
      * @param paginationRequest 分页
      * @return 数据项列表
      */
-    Result findDictionaryItemByCode(String code, PaginationRequest paginationRequest);
+    Result findDictionaryItemByCode(String code, PaginationRequest paginationRequest, DictionaryItemRequest dictionaryItemRequest);
 
     /**
      * 添加新字典

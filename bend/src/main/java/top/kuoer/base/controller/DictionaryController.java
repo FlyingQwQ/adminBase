@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.kuoer.base.common.Result;
-import top.kuoer.base.model.vo.DictionaryItemVO;
-import top.kuoer.base.model.vo.DictionaryVO;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.vo.*;
 import top.kuoer.base.service.DictionaryService;
 
 @RestController
@@ -26,14 +24,14 @@ public class DictionaryController {
 
     @RequestMapping(path = "/findAllDictionary")
     @SaCheckPermission("authorize.findAllDictionary")
-    public Result findAllDictionary(PaginationRequest paginationRequest) {
-        return this.dictionaryService.findAllDictionary(paginationRequest);
+    public Result findAllDictionary(PaginationRequest paginationRequest, DictionaryRequest dictionaryRequest) {
+        return this.dictionaryService.findAllDictionary(paginationRequest, dictionaryRequest);
     }
 
     @RequestMapping(path = "/findDictionaryItemByCode")
     @SaCheckLogin
-    public Result findDictionaryItemByCode(@RequestParam String code, PaginationRequest paginationRequest) {
-        return this.dictionaryService.findDictionaryItemByCode(code, paginationRequest);
+    public Result findDictionaryItemByCode(@RequestParam String code, PaginationRequest paginationRequest, DictionaryItemRequest dictionaryItemRequest) {
+        return this.dictionaryService.findDictionaryItemByCode(code, paginationRequest, dictionaryItemRequest);
     }
 
     @RequestMapping(path = "/addDictionary")

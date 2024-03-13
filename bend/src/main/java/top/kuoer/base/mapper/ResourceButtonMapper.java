@@ -1,5 +1,6 @@
 package top.kuoer.base.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import top.kuoer.base.model.entity.ResourceButtonEntity;
@@ -8,14 +9,10 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface ResourceButtonMapper {
-
-    @Select("SELECT * from resource_button")
-    List<ResourceButtonEntity> findAllResourceButton();
+public interface ResourceButtonMapper extends BaseMapper<ResourceButtonEntity> {
 
     @Select("SELECT resource_button.* FROM menu_resource_button JOIN resource_button ON menu_resource_button.resourceId = resource_button.id WHERE menu_resource_button.menuId = #{id}")
     List<ResourceButtonEntity> findResourceButtonByMenuId(@Param("id") int menuId);
-
 
     @Insert("insert into menu_resource_button (resourceId, menuId) values (#{resourceId}, #{menuId})")
     boolean addResourceButtonByMenuId(@Param("menuId") int menuId, @Param("resourceId") int resourceId);

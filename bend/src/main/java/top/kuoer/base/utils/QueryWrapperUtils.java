@@ -3,6 +3,7 @@ package top.kuoer.base.utils;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import top.kuoer.base.annotation.NotFilter;
 
 import java.lang.reflect.Field;
@@ -35,7 +36,5 @@ public class QueryWrapperUtils {
             }
         });
     }
-
-
 
 }

@@ -179,7 +179,7 @@ export default {
             }).catch(() => {});
         },
 
-        add() {
+        add() {1
             this.addDialog = true;
         },
         search() {
