@@ -60,7 +60,7 @@ export default {
                             this.$store.commit('SET_USER_INFO', res.data);
                             this.$router.push('/main/');
                         } else {
-                            this.$message.error(res.msg);
+                            this.$message.error(res.data);
                         }
                     }).catch((errorMsg) => {
                         this.$message.error(errorMsg);

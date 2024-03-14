@@ -7,9 +7,10 @@ import lombok.ToString;
 @ToString
 public class UserRequest {
 
-    private int id;
+    private Integer id;
     private String username;
     private String password;
+    private Integer state;
     private Integer[] roles;
 
 }

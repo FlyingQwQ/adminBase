@@ -21,6 +21,10 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor);
 
+import md5 from 'js-md5';
+Vue.prototype.$md5 = md5;
+
+
 Vue.config.productionTip = false;
 
 Vue.prototype.$bus = new Vue(); //全局事件总线

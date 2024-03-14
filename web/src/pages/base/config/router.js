@@ -51,6 +51,11 @@ let router = [
         path: 'resourceButton',
         component: () => import('@/pages/base/systemManage/ResourceButtonManage.vue')
     },
+    {
+        path: 'filesManage',
+        component: () => import('@/pages/base/systemManage/FilesManage.vue')
+    },
+    
 ]
 
 export default router;

@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService {
     public Result login(String userName, String password) {
         Integer userId = this.userMapper.findIdByUnameAndPwd(userName, password);
         if(null != userId) {
+
+            UserInfo userInfo = this.userMapper.selectOne(new QueryWrapper<UserInfo>().eq("id", userId));
+            if(userInfo.getState() == 1) {
+                return new Result(ResultCode.LOGINFAIL, "登陆失败，账号状态异常{" + userInfo.getState() + "}");
+            }
+
             StpUtil.login(userId);
 
             LoginResult loginResult = new LoginResult();
@@ -55,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
             return new Result(ResultCode.SUCCESS, loginResult);
         }
-        return new Result(ResultCode.LOGINFAIL, "登陆失败");
+        return new Result(ResultCode.LOGINFAIL, "登陆失败，请检查账号或密码是否有误");
     }
 
     @Override
@@ -120,6 +126,9 @@ public class UserServiceImpl implements UserService {
         this.authorizeMapper.deleteUserRole(userRequest.getId());
         for(Integer roleId : userRequest.getRoles()) {
             this.authorizeMapper.addRoleToUser(roleId, userRequest.getId());
+        }
+        if(userRequest.getState() == 1) {   //当账号被禁用，强制登出
+            StpUtil.kickout(userRequest.getId());
         }
         return new Result(ResultCode.SUCCESS, "修改成功");
     }

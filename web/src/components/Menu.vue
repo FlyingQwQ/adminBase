@@ -1,14 +1,14 @@
 <template>
     <el-menu
         v-if="menuList.length > 0"
-        :collapse="false"
+        :collapse="collapse"
         class="el-menu-vertical-demo"
         :default-active="$store.state.tabs.activityTabs.url"
         @open="handleOpen"
         @close="handleClose"
         @select="handleSelect">
         <template v-for="item in menuList">
-            <MenuItem :item="item" :key="item.name"></MenuItem>
+            <MenuItem :item="item"></MenuItem>
         </template>
     </el-menu>
     <el-empty v-else :image-size="100" description="没有分配菜单"></el-empty>
@@ -19,6 +19,12 @@ import { fetch } from '@/config';
 import tabsTool from '@/utils/tabsTool';
 
 export default {
+    props: {
+        collapse: {
+            type: Boolean,
+            default: false
+        }
+    },
     data() {
         return {
             menuList: []
@@ -62,5 +68,14 @@ export default {
 .el-menu {
     border-right: none;
 }
+</style>
 
+<style>
+.el-menu--collapse .el-submenu__title span {
+  display: none;
+}
+/*隐藏 > */
+.el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
+  display: none;
+}
 </style>

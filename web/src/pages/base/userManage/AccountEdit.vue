@@ -55,7 +55,13 @@ export default {
                     key: 'password',
                     type: 'password',
                     placeholder: '不填则不修改'
-                }
+                },
+                {
+                    label: '账号状态',
+                    key: 'state',
+                    type: 'lookup',
+                    code: 'ZHZT'
+                },
             ],
 
             userId: 0,
@@ -107,6 +113,7 @@ export default {
                 if(res.code == 1) {
                     this.$message.success('保存成功');
                     tabsTool.closeCurrentTab();
+                    this.$bus.$emit('reloadMenu');
                 }
             });
         },

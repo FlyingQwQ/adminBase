@@ -1,6 +1,6 @@
 <template>
     <el-select 
-        v-model="value" 
+        v-model="internalValue" 
         :disabled="disabled"
         :placeholder="placeholder"
         style="width: 100%;">
@@ -12,31 +12,40 @@
 import { fetch } from '@/config';
 
 export default {
-props: {
-    code: String,
-    disabled: Boolean,
-    placeholder: String,
-},
-data() {
-    return {
-        value: '',
-        data: []
+    props: {
+        code: String,
+        disabled: Boolean,
+        placeholder: String,
+        value: null
+    },
+    data() {
+        return {
+            data: [],
+            internalValue: this.value
+        }
+    },
+    mounted() {
+        this.loadData();
+    },
+    methods: {
+        loadData() {
+            fetch.findDictionaryItemByCode({
+                code: this.code ?? ''
+            }).then((res) => {
+                if(res.code == 1) {
+                    this.data = res.data.list;
+                }
+            });
+        }
+    },
+    watch: {
+        value(newValue) {
+            this.internalValue = String(newValue);
+        },
+        internalValue(newValue) {
+            this.$emit('update:value', newValue);
+        }
     }
-},
-mounted() {
-    this.loadData();
-},
-methods: {
-    loadData() {
-        fetch.findDictionaryItemByCode({
-            code: this.code ?? ''
-        }).then((res) => {
-            if(res.code == 1) {
-                this.data = res.data.list;
-            }
-        });
-    }
-}
 }
 </script>
 

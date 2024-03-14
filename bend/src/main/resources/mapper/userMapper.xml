@@ -10,6 +10,7 @@
         <if test="password != null and password != ''">
             , password = #{password}
         </if>
+        , state = #{state}
         WHERE id = #{id}
     </update>
 

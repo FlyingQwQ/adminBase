@@ -1,5 +1,6 @@
 package top.kuoer.base.mapper;
 
+import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import top.kuoer.base.model.entity.FileEntity;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface FileMapper {
+public interface FileMapper extends MPJBaseMapper<FileEntity> {
 
     boolean saveFiles(@Param("fileEntityList") List<FileEntity> fileEntityList);
 

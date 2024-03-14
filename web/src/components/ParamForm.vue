@@ -1,6 +1,6 @@
 <template>
     <div class="simpleForm">
-        <el-form ref="form" :rules="rules" label-position="right" :model="form" label-width="80px">
+        <el-form ref="form" :rules="rules" label-position="right" :model="form" label-width="auto">
             <el-row :gutter="20">
                 <el-col v-for="item in params" :key="item.label" :span="item.span ?? 6">
                     <el-form-item 
@@ -26,6 +26,7 @@
                             item.type === 'lookup'
                         ">
                         <DictionarySelect 
+                            :value.sync="form[item.key]"
                             :code="item.code" 
                             :disabled="item.disabled"
                             :placeholder="item.placeholder"

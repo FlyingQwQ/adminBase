@@ -1,20 +1,23 @@
 <!-- 主框架 -->
 <template>
   <el-container>
-    <el-aside width="200px">
+    <el-aside :width="collapse ? 'auto' : '200px'">
       <div class="logo-box">
         <span class="systemName">{{ systemName }}</span>
       </div>
       <!-- 侧边栏 -->
-      <Menu></Menu>
+      <Menu :collapse="collapse"></Menu>
     </el-aside>
     <el-container>
       <el-header>
         <!-- 头部 -->
-        <el-breadcrumb>
-          <el-breadcrumb-item><a href="/" class="home">首页</a></el-breadcrumb-item>
-          <el-breadcrumb-item v-for="item in $store.state.tabs.breadcrumb" :key="item">{{ item }}</el-breadcrumb-item>
-        </el-breadcrumb>
+        <div class="front">
+          <i :class="[collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold', 'switch-collapse']" @click="handleCollapse"></i>
+          <el-breadcrumb>
+            <el-breadcrumb-item><a href="/" class="home">首页</a></el-breadcrumb-item>
+            <el-breadcrumb-item v-for="item in $store.state.tabs.breadcrumb" :key="item">{{ item }}</el-breadcrumb-item>
+          </el-breadcrumb>
+        </div>
         <el-popover
           placement="top-start"
           width="200"
@@ -70,6 +73,7 @@ export default {
   data() {
     return {
       systemName: platform.systemName,
+      collapse: false,
     }
   },
   mounted() {
@@ -101,6 +105,10 @@ export default {
 
     refreshPage() {
       tabsTool.refreshCurrentTab();
+    },
+
+    handleCollapse() {
+      this.collapse = !this.collapse;
     }
   }
 }
@@ -163,25 +171,39 @@ export default {
     // flex-direction: row-reverse;
     color: #fff;
 
-    .systemName {
-      font-weight: bold;
-      font-size: 1.6rem;
-    }
+    .front {
+      display: flex;
 
-    .el-breadcrumb .home {
-      color: #ffffff;
-      font-weight:400 !important;
-    }
+      .switch-collapse {
+        transform: scale(1.3);
+        margin-right: 20px;
+      }
 
-    .el-breadcrumb ::v-deep .el-breadcrumb__inner {
-      color: #ffffff !important;
-      font-weight:400 !important;
+      .systemName {
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+
+      .el-breadcrumb .home {
+        color: #ffffff;
+        font-weight:400 !important;
+      }
+      
+      .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+        color: #ffffff !important;
+        font-weight:400 !important;
+      }
+      /* 被选中时的颜色 */
+      .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
+        color: #ffffff !important;
+        font-weight:800 !important;
+      }
     }
-    /* 被选中时的颜色 */
-    .el-breadcrumb__item:last-child ::v-deep .el-breadcrumb__inner {
-      color: #ffffff !important;
-      font-weight:800 !important;
-    }
+    
+
+
+
+
 
   }
 

@@ -4,18 +4,18 @@
             <el-submenu :index="item.name">
                 <template slot="title">
                     <i :class="item.icon ?? ''"></i>
-                    {{ item.name }}
+                    <span>{{ item.name }}</span>
                 </template>
                 <template v-for="item in item.children">
-                    <MenuItem :item="item" :key="item.name"></MenuItem>
+                    <MenuItem :item="item"></MenuItem>
                 </template>
             </el-submenu>
         </template>
         <template v-else>
             <el-menu-item :index="item.url" :item="item">
+                <i :class="item.icon ?? ''"></i>
                 <template slot="title">
-                    <i :class="item.icon ?? ''"></i>
-                    {{ item.name }}
+                    <span>{{ item.name }}</span>
                 </template>
             </el-menu-item>
         </template>
@@ -40,8 +40,3 @@ export default {
     }
 }
 </script>
-
-<style lang="less" scoped>
-
-</style>
-

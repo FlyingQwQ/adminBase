@@ -73,6 +73,17 @@ export default {
                     key: 'username'
                 },
                 {
+                    label: '状态',
+                    render: (h, row) => {
+                        return h('el-tag', {
+                            props: {
+                                type: row.state === 0 ? 'success' : 'danger'
+                            }
+                        }, row.state === 0 ? '正常' : '禁用');
+                    },
+                    key: 'state'
+                },
+                {
                     label: '操作',
                     render: (h, row) => {
                         return h('div', [
