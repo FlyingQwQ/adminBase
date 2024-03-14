@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.kuoer.base.common.Result;
+import top.kuoer.base.model.dto.DictionaryItemRequest;
+import top.kuoer.base.model.dto.DictionaryRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.model.vo.*;
 import top.kuoer.base.service.DictionaryService;
 

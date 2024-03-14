@@ -3,7 +3,7 @@ package top.kuoer.base.service;
 import org.springframework.web.multipart.MultipartFile;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.model.dto.FileDto;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
 
 import java.io.IOException;
 

@@ -3,9 +3,9 @@ package top.kuoer.base.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.kuoer.base.model.vo.ChangePasswordRequest;
-import top.kuoer.base.model.vo.PaginationRequest;
-import top.kuoer.base.model.vo.UserRequest;
+import top.kuoer.base.model.dto.ChangePasswordRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
+import top.kuoer.base.model.dto.UserRequest;
 import top.kuoer.base.service.UserService;
 import top.kuoer.base.common.Result;
 

@@ -1,10 +1,8 @@
 package top.kuoer.base.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.util.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.common.ResultCode;
 import top.kuoer.base.mapper.*;
+import top.kuoer.base.model.dto.PaginationRequest;
+import top.kuoer.base.model.dto.PermissionRequest;
+import top.kuoer.base.model.dto.RolePermissionRequest;
+import top.kuoer.base.model.dto.RoleRequest;
 import top.kuoer.base.model.entity.*;
 import top.kuoer.base.model.vo.*;
 import top.kuoer.base.service.AuthorizeService;

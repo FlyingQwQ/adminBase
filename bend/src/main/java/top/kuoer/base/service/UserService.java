@@ -1,10 +1,9 @@
 package top.kuoer.base.service;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import top.kuoer.base.common.Result;
-import top.kuoer.base.model.vo.ChangePasswordRequest;
-import top.kuoer.base.model.vo.PaginationRequest;
-import top.kuoer.base.model.vo.UserRequest;
+import top.kuoer.base.model.dto.ChangePasswordRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
+import top.kuoer.base.model.dto.UserRequest;
 
 public interface UserService {
 

@@ -1,6 +1,10 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
+import top.kuoer.base.model.dto.PaginationRequest;
+import top.kuoer.base.model.dto.PermissionRequest;
+import top.kuoer.base.model.dto.RolePermissionRequest;
+import top.kuoer.base.model.dto.RoleRequest;
 import top.kuoer.base.model.vo.*;
 import top.kuoer.base.model.entity.Permission;
 import top.kuoer.base.model.entity.Role;

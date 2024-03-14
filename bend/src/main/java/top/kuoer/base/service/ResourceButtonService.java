@@ -1,8 +1,8 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
-import top.kuoer.base.model.vo.PaginationRequest;
-import top.kuoer.base.model.vo.ResourceButtonRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
+import top.kuoer.base.model.dto.ResourceButtonRequest;
 
 public interface ResourceButtonService {
 

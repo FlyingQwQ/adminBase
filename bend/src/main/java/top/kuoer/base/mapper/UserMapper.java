@@ -5,9 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import top.kuoer.base.model.entity.ChangePasswordEntity;
 import top.kuoer.base.model.entity.UserInfo;
-import top.kuoer.base.model.vo.UserRequest;
-
-import java.util.List;
+import top.kuoer.base.model.dto.UserRequest;
 
 @Mapper
 @Repository
@@ -24,9 +22,6 @@ public interface UserMapper extends BaseMapper<UserInfo> {
 
     @Insert("insert into user (username, password) values (#{name}, #{pwd})")
     boolean insertUser(@Param("name") String username, @Param("pwd") String password);
-
-//    @Select("SELECT id, username FROM user")
-    List<UserInfo> getAllUserInfo();
 
     @Select("SELECT * FROM user where id=#{id}")
     UserInfo getUserInfoById(@Param("id") int userId);

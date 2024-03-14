@@ -1,6 +1,9 @@
 package top.kuoer.base.service;
 
 import top.kuoer.base.common.Result;
+import top.kuoer.base.model.dto.DictionaryItemRequest;
+import top.kuoer.base.model.dto.DictionaryRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.model.vo.*;
 
 public interface DictionaryService {

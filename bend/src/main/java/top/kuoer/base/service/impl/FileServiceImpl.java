@@ -2,7 +2,6 @@ package top.kuoer.base.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -21,7 +20,7 @@ import top.kuoer.base.model.dto.FileDto;
 import top.kuoer.base.model.entity.FileEntity;
 import top.kuoer.base.model.entity.UserInfo;
 import top.kuoer.base.model.vo.FileVO;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.service.FileService;
 
 import java.io.File;

@@ -12,12 +12,11 @@ import top.kuoer.base.common.ResultCode;
 import top.kuoer.base.mapper.AuthorizeMapper;
 import top.kuoer.base.mapper.ResourceButtonMapper;
 import top.kuoer.base.mapper.RolesMapper;
-import top.kuoer.base.model.entity.Permission;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.model.entity.ResourceButtonEntity;
 import top.kuoer.base.model.entity.Role;
 import top.kuoer.base.model.entity.RoleMenuResourceButtonQuery;
-import top.kuoer.base.model.vo.ResourceButtonRequest;
+import top.kuoer.base.model.dto.ResourceButtonRequest;
 import top.kuoer.base.service.ResourceButtonService;
 import top.kuoer.base.utils.QueryWrapperUtils;
 

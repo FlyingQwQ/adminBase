@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import top.kuoer.base.common.Result;
 import top.kuoer.base.model.dto.FileDto;
-import top.kuoer.base.model.vo.PaginationRequest;
+import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.service.FileService;
 
 import java.io.IOException;
