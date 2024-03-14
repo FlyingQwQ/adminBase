@@ -12,6 +12,7 @@ import top.kuoer.base.model.dto.FileDto;
 import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.service.FileService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
@@ -47,6 +48,11 @@ public class FileController {
     @SaCheckPermission("file.findAllFileList")
     public Result findAllFileList(PaginationRequest paginationRequest, FileDto fileDto) {
         return this.fileService.findAllFileList(paginationRequest, fileDto);
+    }
+
+    @RequestMapping(path = "/download", method = RequestMethod.GET)
+    public Result download(HttpServletResponse response, @RequestParam("tmpName") String fileName) throws IOException {
+        return this.fileService.download(response, fileName);
     }
 
 }

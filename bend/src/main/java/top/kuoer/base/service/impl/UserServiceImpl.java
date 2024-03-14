@@ -110,10 +110,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result delete(int userId) {
-        if(this.userMapper.delete(userId)) {
-            return new Result(ResultCode.SUCCESS, "删除成功");
+        UserInfo userInfo = this.userMapper.selectOne(new QueryWrapper<UserInfo>().eq("id", userId));
+        if(null != userInfo && userInfo.getDel() != 1) {
+            if(this.userMapper.delete(userId)) {
+                return new Result(ResultCode.SUCCESS, "删除成功");
+            }
+            return new Result(ResultCode.OPERATIONFAIL, null);
+        } else {
+            return new Result(ResultCode.OPERATIONFAIL, "该用户不允许被删除！");
         }
-        return new Result(ResultCode.OPERATIONFAIL, null);
     }
 
     @Override

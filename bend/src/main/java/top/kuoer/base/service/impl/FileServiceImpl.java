@@ -23,8 +23,8 @@ import top.kuoer.base.model.vo.FileVO;
 import top.kuoer.base.model.dto.PaginationRequest;
 import top.kuoer.base.service.FileService;
 
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,6 +129,29 @@ public class FileServiceImpl implements FileService {
         queryWrapper.like(StringUtils.isNotBlank(fileDto.getUserName()), UserInfo::getUsername, fileDto.getUserName());
 
         return new Result(ResultCode.SUCCESS, PageInfo.of(this.fileMapper.selectJoinList(FileVO.class, queryWrapper)));
+    }
+
+    @Override
+    public Result download(HttpServletResponse response, String fileName) throws IOException {
+        File file = new File(this.uploadFilePath + '/' + fileName);
+        if (!file.exists()) {
+            return new Result(ResultCode.NOTFOUND, "文件不存在");
+        }
+        response.reset();
+        response.setContentType("application/octet-stream");
+        response.setCharacterEncoding("utf-8");
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName );
+
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+        byte[] buff = new byte[1024];
+        OutputStream os  = response.getOutputStream();
+        int i = 0;
+        while ((i = bis.read(buff)) != -1) {
+            os.write(buff, 0, i);
+            os.flush();
+        }
+        return null;
     }
 
 

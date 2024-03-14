@@ -2,6 +2,7 @@
     <el-menu
         v-if="menuList.length > 0"
         :collapse="collapse"
+        :collapse-transition="false"
         class="el-menu-vertical-demo"
         :default-active="$store.state.tabs.activityTabs.url"
         @open="handleOpen"

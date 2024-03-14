@@ -5,6 +5,8 @@ import top.kuoer.base.common.Result;
 import top.kuoer.base.model.dto.FileDto;
 import top.kuoer.base.model.dto.PaginationRequest;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface FileService {
@@ -37,5 +39,13 @@ public interface FileService {
      * @return 文件列表
      */
     Result findAllFileList(PaginationRequest paginationRequest, FileDto fileDto);
+
+    /**
+     * 文件下载
+     * @param response 响应
+     * @param fileName 缓存文件名
+     * @return 文件数据
+     */
+    Result download(HttpServletResponse response, String fileName) throws IOException;
 
 }

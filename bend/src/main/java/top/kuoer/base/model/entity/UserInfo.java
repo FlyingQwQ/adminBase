@@ -16,5 +16,6 @@ public class UserInfo {
     private String username;
     private String password;
     private Integer state;
+    private Integer del;
 
 }

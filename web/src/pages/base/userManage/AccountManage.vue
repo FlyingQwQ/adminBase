@@ -98,7 +98,7 @@ export default {
                                     }
                                 }
                             }, '修改'),
-                            h('el-button', {
+                            row.del === 0 ? h('el-button', {
                                 props: {
                                     type: 'danger',
                                     size: 'small'
@@ -108,7 +108,7 @@ export default {
                                         this.delete(row);
                                     }
                                 }
-                            }, '删除')
+                            }, '删除') : null
                         ]);
                     }
                 }
@@ -153,11 +153,10 @@ export default {
                     userId: row.id
                 }).then((res) => {
                     if(res.code == 1) {
-                        this.$message({
-                            type: 'success',
-                            message: '删除成功!'
-                        });
+                        this.$message.success('删除成功!');
                         this.init();
+                    } else {
+                        this.$message.error(res.data);
                     }
                 });
             }).catch(() => {});
