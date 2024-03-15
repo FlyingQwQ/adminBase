@@ -2,7 +2,7 @@
 admin管理后台
 ****
 #### 这是一个简单的admin管理后台
-前端使用vue2.0、elementUI、vuex、axios等技术栈。  
+前端使用vue2、elementUI、vuex、axios等技术栈。  
 后端使用SpringBoot、mybatisPlus、sqlite、saToken等技术栈。  
 
 支持角色管理、菜单管理、用户管理、文件管理、数据字典等。
